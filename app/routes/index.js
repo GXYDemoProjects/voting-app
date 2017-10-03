@@ -1,7 +1,5 @@
-'use strict';
-
-var path = process.cwd();
-var ClickHandler = require(path + '/app/controllers/clickHandler.server.js');
+const path = process.cwd();
+const ClickHandler = require(path + '/app/controllers/clickHandler.server.js');
 
 module.exports = function (app, passport) {
 

@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+- "iojs"
+- "6"
+- "6.11.2"
+- "7"
+notifications:
+email:
+on_success: never # default: change
+on_failure: change # default: always
