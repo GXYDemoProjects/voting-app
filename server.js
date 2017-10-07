@@ -1,33 +1,17 @@
 require("babel-register");
-const express = require('express');
-const routes = require('./app/routes/index.js');
-const mongoose = require('mongoose');
-const passport = require('passport');
-const session = require('express-session');
+const app = require('./app');
 
-const app = express();
-require('dotenv').load();
-require('./app/config/passport')(passport);
-
-mongoose.connect(process.env.MONGO_URI);
-mongoose.Promise = global.Promise;
-
-app.use('/controllers', express.static(process.cwd() + '/app/controllers'));
-app.use('/public', express.static(process.cwd() + '/public'));
-app.use('/common', express.static(process.cwd() + '/app/common'));
-
-app.use(session({
-	secret: 'secretClementine',
-	resave: false,
-	saveUninitialized: true
-}));
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-routes(app, passport);
-
-var port = process.env.PORT || 8080;
-app.listen(port,  function () {
-	console.log('Node.js listening on port ' + port + '...');
+ 
+app.listen(process.env.SERVER_PORT || 3001, (err) => {
+  if (err) {
+    throw err;
+  } else { 
+    console.log(
+			`
+    Server is running on port: ${process.env.SERVER_PORT || 3001}
+    ---
+    Running on ${process.env.NODE_ENV}
+    `,
+		);
+  }
 });
