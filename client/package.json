@@ -1,21 +1,16 @@
 {
-  "name": "voting-app",
+  "name": "Voting App",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3001/",
-  "devDependencies": {
-    "enzyme": "2.4.1",
-    "react-test-render": "^1.0.3",
-    "react-addons-test-utils": "15.4.0"
-  },
   "dependencies": {
-    "materialize-css": "^0.100.2",
+    "material-ui": "^0.19.4",
     "prop-types": "^15.6.0",
-    "react": "15.4.0",
-    "react-dom": "15.4.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
-    "recompose": "^0.25.1",
+    "react-scripts": "1.0.14",
+    "recompose": "^0.26.0",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0"
   },
@@ -25,5 +20,9 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "homepage": "https://voting-app-gxy.herokuapp.com"
+  "devDependencies": {
+    "enzyme": "^3.1.0",
+    "react-addons-test-utils": "^15.6.2",
+    "react-test-render": "^1.0.3"
+  }
 }
