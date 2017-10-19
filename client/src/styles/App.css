@@ -1,28 +1,69 @@
-.App {
-  text-align: center;
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+nav {
+  background-color: white
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
+nav .brand-logo {
+  color: #699;
+  font-family: 'Oswald', sans-serif;
+}
+
+nav ul a {
+  color: #222;
+}
+
+nav .brand-logo {
+  font-size: 1.7rem;
+}
+
+span.title-first {
+  font-size: 2.4rem;
+}
+
+.btn {
+  background-color: #699;
+}
+
+.btn:hover {
+  background-color: #87cfcf;
   color: white;
 }
 
-.App-title {
-  font-size: 1.5em;
+
+nav ul a {
+  position: relative;
+}
+nav ul a:hover {
+  color: #699;
+}
+nav ul li.item>a::after {
+  content: "";
+  left: 0px;
+  top: 64px;
+  width: 0;
+  background-color: #699;
+  height: 2px;
+  position: absolute;
+  transition: width 0.2s ease-in;
+
 }
 
-.App-intro {
-  font-size: large;
+nav ul li.item>a:hover::after {
+  width: 100%;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+nav ul li.active {
+  border-bottom: 2px solid #699;
+}
+nav ul li.active a {
+  color: #699;  
+}
+
+.button-collapse {
+  color: #699;
 }

@@ -4,22 +4,22 @@ import PropTypes from 'prop-types';
 // import { connect } from 'react-redux';
 
 import Header from './common/Header';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 // import Footer from './common/Footer';
 // import AllPolls from './AllPolls';
 // import MyPolls from './MyPolls';
 // import SinglePoll from './SinglePoll';
+import '../styles/App.css';
 
 const testUser = {
   login: true,
   userName: 'GuoXiaoyang',
 }
 
+
 const App = () => (
-  <MuiThemeProvider>
     <Header user={testUser}/>
-  </MuiThemeProvider>
-)
+);
 
 // App.propTypes = {
 //   polls: PropTypes.arrayOf(PropTypes.shape({
