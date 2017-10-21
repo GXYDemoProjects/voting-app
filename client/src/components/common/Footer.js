@@ -1,32 +1,40 @@
 import React from 'react';
 
-const Footer = () => (
-  <footer class="page-footer">
-    <div class="container">
-      <div class="row">
-        <div class="col l6 s12">
-          <h5 class="white-text">Voting App</h5>
-          <p>
-            Built by
-            <a href="https://github.com/GuoXiaoyang">GuoXiaoyang</a>
-          </p>
-          <p>
-            Following the instructions of 
-            <a href="https://www.freecodecamp.org/challenges/build-a-voting-app">Basejump: Build a Voting App | Free Code Camp</a>
-          </p>
+const Footer = () => {
+  const socialLinks = [
+    {href: 'https://github.com/GuoXiaoyang', iconHref: 'icon-mark-github'}, 
+    {href: 'https://github.com', iconHref: 'icon-instagram-with-circle'}, 
+    {href: 'https://github.com', iconHref: 'icon-twitter-with-circle'}, 
+    {href: 'https://github.com', iconHref: 'icon-facebook-with-circle'}, 
+  ];
+  const renderSocialLink = (social, index) => (
+    <a href={social.href} target="_blank" key={index}>
+      <svg className={`icon ${social.iconHref}`}>
+        <use xlinkHref={`#${social.iconHref}`}></use>
+      </svg>
+    </a>
+  );
+  const socialIconWithLinks = (
+    socialLinks.map((socialLink, index) => renderSocialLink(socialLink, index))
+  );
+  return (
+    <footer className="page-footer grey darken-3">
+      <div className="container">
+        <div className="row">
+          <h5 className="white-text">CONTACT</h5>
         </div>
-        <div class="col l4 offset-l2 s12">
-          <iframe src="http://ghbtns.com/github-btn.html?user=GuoXiaoyang&repo=Voting-App&type=watch&count=true&size=large" frameborder="0"></iframe>
+        <div className="row">
+          {socialIconWithLinks}
+          
         </div>
       </div>
-    </div>
-    <div class="footer-copyright">
-      <div class="container">
-        © 2017 Copyright, All rights reserved.
-        <a class="grey-text text-lighten-4 right" href="https://github.com/Dogfalo/materialize/blob/master/LICENSE">MIT License</a>
+      <div className="footer-copyright">
+        <div className="container">
+          © 2017 Copyright, All rights reserved.
+        </div>
       </div>
-    </div>
-  </footer>
-);
+    </footer>
+  );
+};
 
 export default Footer;
