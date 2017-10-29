@@ -1,13 +1,12 @@
-import FetchContainer from './FetchContainer';
-import Polls from './Polls';
+import React from 'react';
 
-const url = './MyPolls'
-const MyPolls = FetchContainer(url)(Polls);
-const WithTitleMyPolls = () => (
-  <div className="container">
-    <h2>My Polls</h2>
-    <MyPolls />
-  </div>
-)
+const MyPolls = () => {
+  return (
+    <div className="container">
+      <h2>My Polls</h2>
+      
+    </div>
+  );
+};
 
-export default WithTitleMyPolls;
+export default MyPolls;

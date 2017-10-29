@@ -1,13 +1,34 @@
-import FetchContainer from './FetchContainer';
-import Polls from './Polls';
+import React from 'react';
+import CardGrid from './CardGrid';
+import MoreButton from './MoreButton';
+import ToUpButton from './ToTopButton';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actionCreators from '../actions';
 
-const url = './AllPolls'
-const AllPolls = FetchContainer(url)(Polls);
-const WithTitleAllPolls = () => (
-  <div className="container">
-    <h2>All Polls</h2>
-    <AllPolls />
-  </div>
+const mapStateToProps = (state) => (
+  Object.assign({},{
+    user: state.user,
+    polls: state.polls,
+    currentIndex: state.polls.length < state.ui.currentIndex ? state.polls.length : state.ui.currentIndex,
+  })
 )
 
-export default WithTitleAllPolls;
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(actionCreators, dispatch);
+};
+
+
+let AllPolls = ({ polls, currentIndex, loadMore }) => {
+  console.log(polls);
+  return (
+    <main>
+      <CardGrid polls={polls} currentIndex={currentIndex} />
+      <MoreButton polls={polls} currentIndex={currentIndex} loadMore={loadMore}/>
+      <ToUpButton />
+    </main>
+  )
+}
+
+AllPolls = connect(mapStateToProps, mapDispatchToProps)(AllPolls);
+export default AllPolls;

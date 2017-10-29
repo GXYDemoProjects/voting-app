@@ -1,17 +1,12 @@
 import { combineReducers } from 'redux';
-import sidebarVisibility from './sidebar';
-import dropdownVisibility from './dropdown';
-import currentIndex from './currentIndex';
 import user from './user';
 import polls from './polls';
-
+import ui from './ui';
 
 const App = combineReducers({
-  sidebarVisibility,
-  dropdownVisibility,
+  ui,
   user,
   polls,
-  currentIndex
 });
 
 export default App;

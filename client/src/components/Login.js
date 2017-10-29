@@ -1,12 +1,12 @@
 import React from 'react';
 
-const NewPoll = () => {
+const Login = () => {
   return (
     <div className="container">
-      <h2>New Poll</h2>
+      <h2>Log in</h2>
       
     </div>
   );
 }
 
-export default NewPoll;
+export default Login;

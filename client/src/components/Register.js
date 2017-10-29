@@ -1,12 +1,12 @@
 import React from 'react';
 
-const NewPoll = () => {
+const Register = () => {
   return (
     <div className="container">
-      <h2>New Poll</h2>
+      <h2>Register</h2>
       
     </div>
   );
 }
 
-export default NewPoll;
+export default Register;

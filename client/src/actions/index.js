@@ -10,4 +10,9 @@ export const toggleDropdownVisibility = (status) => ({
 
 export const loadMore  = () => ({
   type: 'LOAD_MORE',
-})
+});
+
+export const activeLink = (path) => ({
+  type: 'SWITCH_ACTIVE',
+  path
+});

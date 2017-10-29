@@ -1,69 +1,35 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import * as actionCreators from '../actions';
+import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 // import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // import { connect } from 'react-redux';
 
-import Header from './common/Header';
-import Main from './Main';
-import Footer from './common/Footer';
-// import AllPolls from './AllPolls';
-// import MyPolls from './MyPolls';
-// import SinglePoll from './SinglePoll';
+import Header from './Header';
+import Footer from './Footer';
+import AllPolls from './AllPolls';
+import MyPolls from './MyPolls';
+import NewPoll from './NewPoll';
+import Login from './Login';
+import Register from './Register';
+import Logout from './Logout';
 import '../styles/App.css';
 
 
-let App = (props) => {
-  console.log('props:', props);
-  return (
-    <div className="app">
-      <Header {...props} />
-      <Main {...props} />
-      <Footer />
-    </div> 
-  );
-};
+class App extends React.Component {
 
-// App.propTypes = {
-//   polls: PropTypes.arrayOf(PropTypes.shape({
-//     title: PropTypes.string.isRequired,
-//     description: PropTypes.string.isRequired,
-//     answers: PropTypes.arrayOf(PropTypes.shape({
-//       answer: PropTypes.string.isRequired,
-//       votes: PropTypes.number.isRequired,
-//     })).isRequired,
-//   })).isRequired,
-//   user: PropTypes.shape({
-//     current: PropTypes.object,
-//     loggedIn: PropTypes.bool.isRequired,
-//   }), 
-// };
-
-// const mapStateToProps = state => ({
-//   polls: state.polls,
-//   user: state.user,
-// });
-
-const mapStateToProps = (state) => (
-  Object.assign({},{
-    user: state.user,
-    sidebarVisibility: state.sidebarVisibility,
-    dropdownVisibility: state.dropdownVisibility,
-    polls: state.polls,
-    currentIndex: state.polls.length < state.currentIndex ? state.polls.length : state.currentIndex,
-  })
-)
-
-const mapDispatchToProps = (dispatch) => ({
-  showSidebar: () => dispatch(actionCreators.toggleSideVisibility(true)),
-  hideSidebar: () => dispatch(actionCreators.toggleSideVisibility(false)),
-  showDropdown: () => dispatch(actionCreators.toggleDropdownVisibility(true)),
-  hideDropdown: () => dispatch(actionCreators.toggleDropdownVisibility(false)),
-  loadMore: () => dispatch(actionCreators.loadMore()),
-});
-
-App = connect(mapStateToProps, mapDispatchToProps)(App);
+  render() {    
+    return (
+      <div className="app">
+        <Header />
+        <Route exact path="/" component={AllPolls} />
+        <Route path="/mypolls" component={MyPolls} />
+        <Route path="/newpoll" component={NewPoll} />
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
+        <Route path="/logout" component={Logout} />
+        <Footer />
+      </div> 
+    );
+  }
+}
 export default App;
-
-
