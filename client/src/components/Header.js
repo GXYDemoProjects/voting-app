@@ -83,6 +83,8 @@ const Header = ({user, toggleSidebar, toggleDropdown, dropdownVisibility, sideba
   const loggedIn = (type) => {
     return (
     <span>
+      <ActiveNavLink switchActive={switchActive} to="/mypolls" label="My Polls"  className={type==='PC' ? 'item' : ''} />
+      <ActiveNavLink switchActive={switchActive} to="/newpoll" label="New Poll" className={type==='PC' ? 'item' : ''} />
       <li className={type==='PC' ? 'item' : ''}>
         <a className="dropdown-button" onClick={handleDrop(type)} >
           {user.userName}
@@ -115,24 +117,19 @@ const Header = ({user, toggleSidebar, toggleDropdown, dropdownVisibility, sideba
             </Link>       
             <ul id="nav-mobile" className="right hide-on-med-and-down">
               <ActiveNavLink switchActive={switchActive} to="/" activeOnlyWhenExact={true} label="Home" className="item"/>
-              <ActiveNavLink switchActive={switchActive} to="/mypolls" label="My Polls" className="item"/>
-              <ActiveNavLink switchActive={switchActive} to="/newpoll" label="New Poll" className="item"/>
-              {/* <li className="item active"><Link to="/">Home</Link></li>
-              <li className="item"><Link to="/mypolls">My Polls</Link></li>
-              <li className="item"><Link to="/newpoll">New Poll</Link></li> */}
-              {user.login ? loggedIn('PC') : loggedOut}
+              {/* <ActiveNavLink switchActive={switchActive} to="/mypolls" label="My Polls" className="item"/> */}
+              {/* <ActiveNavLink switchActive={switchActive} to="/newpoll" label="New Poll" className="item"/> */}
+              {user.authentication ? loggedIn('PC') : loggedOut}
             </ul>
             {dropdown('PC')}      
             {
               (sidebarVisibility) &&
               <ul className="side-nav" id="mobile-demo">
                 <ActiveNavLink switchActive={switchActive} to="/" activeOnlyWhenExact={true} label="Home" className=""/>
-                <ActiveNavLink switchActive={switchActive} to="/mypolls" label="My Polls" className=""/>
-                <ActiveNavLink switchActive={switchActive} to="/newpoll" label="New Poll" className=""/>
                 {/* <li className="active"><Link to="/">Home</Link></li>
                 <li><Link to="/mypolls">My Polls</Link></li>
                 <li><Link to="/newpoll">New Poll</Link></li> */}
-                {user.login ? loggedIn('mobile') : loggedOut}
+                {user.authentication ? loggedIn('mobile') : loggedOut}
                 {dropdown('mobile')}
               </ul> 
             }

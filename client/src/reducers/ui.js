@@ -11,6 +11,8 @@ const ui = (state = {}, action) => {
       return {...state, currentIndex: state.currentIndex + Constants.OneLoadNums};
     case 'SWITCH_ACTIVE':
       return {...state, activeLink: action.path}
+    case 'LOGOUT': 
+      return {...state, dropdownVisibility: false}
     default:
       return state;
   }

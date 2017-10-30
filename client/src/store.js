@@ -6,7 +6,7 @@ import * as Constants from './constants';
 
 const initState = {
   user: {
-    login: true,
+    authentication: false,
     userName: 'GuoXiaoyang',
     userId: '111',
   },

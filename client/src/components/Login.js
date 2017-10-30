@@ -1,11 +1,12 @@
 import React from 'react';
+import AuthContainer from './AuthContainer';
+import LoginForm from './LoginForm';
 
 const Login = () => {
   return (
-    <div className="container">
-      <h2>Log in</h2>
-      
-    </div>
+    <AuthContainer>
+      <LoginForm />
+    </AuthContainer>
   );
 }
 

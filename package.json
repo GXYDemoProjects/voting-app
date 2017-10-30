@@ -38,7 +38,8 @@
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
     "passport-local": "^1.0.0",
-    "passport-twitter": "^1.0.4"
+    "passport-twitter": "^1.0.4",
+    "redux-form": "^7.1.2"
   },
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",
