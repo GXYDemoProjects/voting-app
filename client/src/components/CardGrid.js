@@ -2,7 +2,8 @@ import React from 'react';
 import SingleCard from './SingleCard';
 
 const CardGrid = ({ polls, currentIndex }) => {
-  const loadPolls = polls.slice(0, currentIndex);
+  
+  const loadPolls = polls.slice(0, currentIndex || polls.length);
   console.log(currentIndex);
   console.log(loadPolls);
   return (

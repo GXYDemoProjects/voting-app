@@ -111,6 +111,7 @@ main .more {
 /* page footer */
 .page-footer {
   text-align: center;
+  
 }
 .icon {
   width: 30px;
@@ -175,15 +176,54 @@ main .more {
   box-shadow: 0 0 5.1px 0.9px rgba(0, 0, 0, 0.3);
 }
 
-.right-auth i {
+.input-field i {
   color: #699;
 }
-.right-auth .btn i { 
+.btn i, .bnt-floating i { 
   color: white;
 }
-
+.input-field input:valid {
+  border-bottom: 1px solid #58c289 !important;
+  box-shadow: 0 1px 0 0 #58c289 !important;
+}
+.input-field input.error {
+  border-bottom: 1px solid red !important;
+  box-shadow: 0 1px 0 0 red !important;
+}
 input:focus ~ .control-label, input:valid ~ .control-label {
   position: absolute;
   top: -1.3rem;
   transition: all linear 0.2s;
+}
+
+/* New Poll */
+.container.new-poll {
+  padding: 10px 20px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  background: white;
+  box-shadow: 0 0 5.1px 0.9px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+.container.new-poll {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  background: white;
+  box-shadow: 0 0 5.1px 0.9px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.new-poll-form {
+  margin: 20px;
+  position: relative;
+}
+.new-poll-form .remove {
+  position: absolute;
+  right: 5px;
+}
+.preview {
+  text-align: left;
+  border: 1px solid #699;
+  padding: 20px;
+  margin: 20px 20px 20px 6px;
 }

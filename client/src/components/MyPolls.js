@@ -1,12 +1,29 @@
 import React from 'react';
+import CardGrid from './CardGrid';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actionCreators from '../actions';
 
-const MyPolls = () => {
-  return (
-    <div className="container">
-      <h2>My Polls</h2>
-      
-    </div>
-  );
+const mapStateToProps = (state) => (
+  Object.assign({},{
+    user: state.user,
+    myPolls: state.myPolls,
+  })
+)
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(actionCreators, dispatch);
 };
 
+
+let MyPolls = ({ myPolls }) => {
+  console.log('myPolls:', myPolls);
+  return (
+    <main>
+      <CardGrid polls={myPolls} />
+    </main>
+  )
+}
+
+MyPolls = connect(mapStateToProps, mapDispatchToProps)(MyPolls);
 export default MyPolls;

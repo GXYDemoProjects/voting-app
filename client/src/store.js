@@ -6,7 +6,7 @@ import * as Constants from './constants';
 
 const initState = {
   user: {
-    authentication: false,
+    authentication: true,
     userName: 'GuoXiaoyang',
     userId: '111',
   },
@@ -130,6 +130,45 @@ const initState = {
         { item: 'qwp', number: 14 },
       ]
     },                  
+  ],
+  myPolls: [
+    {
+      pollId: 1, 
+      userName: 'GuoXiaoyang', 
+      userId: '111', 
+      title: 'Leader Selection',
+      description: '',
+      data: [
+        { item: 'Bob', number: 2 },
+        { item: 'Judy', number: 5 },
+        { item: 'Amy', number: 7 },
+      ]
+    },
+    {
+      pollId: 4, 
+      userName: 'GuoXiaoyang', 
+      userId: '111', 
+      title: 'erb Selection',
+      description: 'Choose which you like adg adgah oiu lkj hg  bn tr po yg re wq sa yui jkl fttg gf jh lfg yte',
+      data: [
+        { item: 'uo', number: 12 },
+        { item: 'ehjl', number: 50 },
+        { item: 'qewi', number: 79 },
+      ]
+    },
+    {
+      pollId: 7, 
+      userName: 'GuoXiaoyang', 
+      userId: '111', 
+      title: 'iypds Selection',
+      description: 'Choose which you like',
+      data: [
+        { item: 'agh', number: 22 },
+        { item: 'Jas', number: 55 },
+        { item: 'age', number: 47 },
+        { item: 'oit', number: 47 },
+      ]
+    }
   ]
 };
 
