@@ -1,8 +1,8 @@
 import React from 'react';
 
-const MySinglePoll = () => (
+const MySinglePoll = ({ match }) => (
   <div className="container">
-    My Single Poll, id:
+    My Single Poll, id:{match.params.id}
   </div>
 );
 

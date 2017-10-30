@@ -20,7 +20,7 @@ let MyPolls = ({ myPolls }) => {
   console.log('myPolls:', myPolls);
   return (
     <main>
-      <CardGrid polls={myPolls} />
+      <CardGrid polls={myPolls} type="own"/>
     </main>
   )
 }

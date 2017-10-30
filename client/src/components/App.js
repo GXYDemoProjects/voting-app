@@ -24,10 +24,10 @@ class App extends React.Component {
       <div className="app">
         <Header />
         <Route exact path="/" component={AllPolls} />
-        <Route path="/allpolls" component={AllPolls} />
-        <Route path="/allpolls/:pollid" component={SinglePoll} />
-        <Route path="/mypolls" component={MyPolls} />
-        <Route path="/mypolls/:pollid" component={MySinglePoll} />
+        <Route exact path="/allpolls" component={AllPolls} />
+        <Route path="/allpolls/:id" component={SinglePoll} />
+        <Route exact path="/mypolls" component={MyPolls} />
+        <Route path="/mypolls/:id" component={MySinglePoll} />
         <Route path="/newpoll" component={NewPoll} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />

@@ -1,6 +1,6 @@
 import React from 'react';
-
-const SingleCard = ({ poll }) => {
+import { Link } from 'react-router-dom';
+const SingleCard = ({ poll, type }) => {
 
   return (
     <div className="col s12 m6 l4">
@@ -10,10 +10,10 @@ const SingleCard = ({ poll }) => {
           <p>{poll.description}</p>
         </div>
         <div className="card-action">
-          <a href="#" className="waves-effect btn">
+          <Link to={`/${type ? 'mypolls': 'allpolls'}/${poll.id}`} className="waves-effect btn">
             <i className="material-icons left md-light">forward</i> 
             See more
-          </a>
+          </Link>
         </div>
       </div>
     </div>

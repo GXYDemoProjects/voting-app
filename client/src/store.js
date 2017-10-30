@@ -18,7 +18,7 @@ const initState = {
   },
   polls: [
     {
-      pollId: 1, 
+      id: 1, 
       userName: 'GuoXiaoyang', 
       userId: '111', 
       title: 'Leader Selection',
@@ -30,7 +30,7 @@ const initState = {
       ]
     },
     {
-      pollId: 2, 
+      id: 2, 
       userName: 'GuoJianzhu', 
       userId: '222', 
       title: 'hh Selection',
@@ -43,7 +43,7 @@ const initState = {
       ]
     },
     {
-      pollId: 3, 
+      id: 3, 
       userName: 'XiaoPan', 
       userId: '333', 
       title: 'asf Selection',
@@ -55,7 +55,7 @@ const initState = {
       ]
     },
     {
-      pollId: 4, 
+      id: 4, 
       userName: 'GuoXiaoyang', 
       userId: '111', 
       title: 'erb Selection',
@@ -67,7 +67,7 @@ const initState = {
       ]
     },
     {
-      pollId: 5, 
+      id: 5, 
       userName: 'GuoXiaoyang', 
       userId: '444', 
       title: 'nk Selection',
@@ -80,7 +80,7 @@ const initState = {
       ]
     },
     {
-      pollId: 6, 
+      id: 6, 
       userName: 'XiaoPan', 
       userId: '333', 
       title: 'qwfh Selection',
@@ -92,7 +92,7 @@ const initState = {
       ]
     },          
     {
-      pollId: 7, 
+      id: 7, 
       userName: 'GuoXiaoyang', 
       userId: '111', 
       title: 'iypds Selection',
@@ -105,7 +105,7 @@ const initState = {
       ]
     },
     {
-      pollId: 8, 
+      id: 8, 
       userName: 'GuoJianzhu', 
       userId: '222', 
       title: 'aher Selection',
@@ -117,7 +117,7 @@ const initState = {
       ]
     },
     {
-      pollId: 9, 
+      id: 9, 
       userName: 'XiaoPan', 
       userId: '333', 
       title: 'ops Selection',
@@ -133,7 +133,7 @@ const initState = {
   ],
   myPolls: [
     {
-      pollId: 1, 
+      id: 1, 
       userName: 'GuoXiaoyang', 
       userId: '111', 
       title: 'Leader Selection',
@@ -145,7 +145,7 @@ const initState = {
       ]
     },
     {
-      pollId: 4, 
+      id: 4, 
       userName: 'GuoXiaoyang', 
       userId: '111', 
       title: 'erb Selection',
@@ -157,7 +157,7 @@ const initState = {
       ]
     },
     {
-      pollId: 7, 
+      id: 7, 
       userName: 'GuoXiaoyang', 
       userId: '111', 
       title: 'iypds Selection',
