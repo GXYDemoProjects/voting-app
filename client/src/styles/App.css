@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  background-color: #F6F6F6;
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
 }
@@ -126,13 +127,13 @@ main .more {
   left: 0;
   width: 100%;
   height: 100%;
-  background: white;
+  background: #F6F6F6;
   z-index: 2;
 }
 .auth-container {
   margin: 100px auto;
   max-width: 400px;
-  height: 500px;
+  height: 520px;
 
 }
 .auth-container .left-auth {
@@ -145,7 +146,7 @@ main .more {
   .auth-container .left-auth {
     display: block;
     width: 330px;
-    height: 500px;
+    height: 520px;
     background: url('../images/left-star.png') 35px 50px;
     background-repeat: no-repeat;
     background-color: #699;
@@ -167,9 +168,10 @@ main .more {
 .right-auth {
   float: left;
   width: 400px;
-  height: 480px;
+  height: 500px;
   margin: 10px 0;
   text-align: center;
+  background-color: white;
   box-shadow: 0 0 5.1px 0.9px rgba(0, 0, 0, 0.3);
 }
 
@@ -178,12 +180,6 @@ main .more {
 }
 .right-auth .btn i { 
   color: white;
-}
-.right-auth h5 {
-  margin-top: 40px; 
-}
-.right-auth .container { 
-  margin-top: 50px; 
 }
 
 input:focus ~ .control-label, input:valid ~ .control-label {

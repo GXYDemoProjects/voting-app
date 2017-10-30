@@ -4,18 +4,20 @@ import { Link } from 'react-router-dom';
 import AuthField from './AuthField';
 
 const formFields = [
-  { label: 'Email', name: 'loginEmail', type:'text', icon: 'email' },
-  { label: 'Password', name: 'loginPassword', type:'password', icon: 'lock' },
+  { label: 'Email', name: 'registerEmail', type:'text', icon: 'email' },
+  { label: 'name', name: 'registerName', type:'text', icon: 'account_circle' },
+  { label: 'Password', name: 'registerPassword', type:'password', icon: 'lock' },
+  { label: 'Confirm Password', name: 'registerConfirmPassword', type:'password', icon: 'lock' },
 ];
 
 
-const LoginForm = (props) => {
+const RegisterForm = (props) => {
   const { handleSubmit, pristine, reset, submitting } = props;
   return ( 
-    <div className="form">
-      <h5 style={{marginTop: '50px'}}>Sign in to Your Account</h5>
+    <div className="register-form">
+      <h5>Create Your Account</h5>
       <form onSubmit={handleSubmit}>
-        <div className="container" style={{marginTop: '40px'}}>
+        <div className="container">
           {
             formFields.map(({ label, name, type, icon }) => 
               (<Field key={name} component={AuthField} icon={icon} type={type} label={label} name={name} />)
@@ -24,15 +26,15 @@ const LoginForm = (props) => {
         </div>
 
         <button className="btn waves-effect waves-light" type="submit" name="action"  disabled={pristine || submitting}>
-          Login
+          Register
           <i className="material-icons right">send</i>
         </button>
       </form>
 
-      <p style={{marginTop: '20px'}}>
-        Don't have an account?<span> </span> 
-        <Link to="/register">
-          Create an account
+      <p style={{marginTop: '10px'}}>
+        Already have an account?<span> </span> 
+        <Link to="/login">
+          Login to your account
         </Link>
       </p>
     </div>
@@ -42,8 +44,14 @@ const LoginForm = (props) => {
 const validate = (values) => {
   const errors = {};
   const re = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-  if(!re.test(values.loginEmail)) {
-    errors.loginEmail = 'You must provide a valid email';
+  if(!re.test(values.registerEmail)) {
+    errors.registerEmail = 'You must provide a valid email';
+  }
+  if(values.registerPassword && values.registerPassword.length < 7) {
+    errors.registerPassword = 'Password should be longer than 6';
+  }
+  if(values.registerConfirmPassword !== values.registerPassword) {
+    errors.registerConfirmPassword = 'Password do not match';
   }
   formFields.forEach(({ name }) => {
     if (!values[name]) {
@@ -56,6 +64,6 @@ const validate = (values) => {
 
 export default reduxForm({
   validate,
-  form: 'loginForm',
+  form: 'registerForm',
   destroyOnUnmount: false
-})(LoginForm);
+})(RegisterForm);
