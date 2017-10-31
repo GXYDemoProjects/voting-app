@@ -16,7 +16,7 @@ const SinglePoll = ({ match, type, polls}) => {
   data.unshift(['item', 'number']);
   console.log('data:', data);
   return (
-    <div className="container new-poll">
+    <div className="container single-poll">
       <div className="row">
         <div className="col m12 l7">
           <div>

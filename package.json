@@ -2,7 +2,11 @@
   "name": "voting-app",
   "version": "1.0.0",
   "description": "A project for FCC challenge.",
-  "main": "server.js",
+  "main": "index.js",
+  "engines": {
+    "node": "8.1.1",
+    "npm": "5.0.3"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/GuoXiaoyang/Voting-App.git"
@@ -38,14 +42,15 @@
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
     "passport-local": "^1.0.0",
-    "passport-twitter": "^1.0.4",
-    "redux-form": "^7.1.2"
+    "passport-twitter": "^1.0.4"
   },
   "scripts": {
-    "start": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "set NODE_ENV=development&&nodemon server.js",
-    "client": "node start-client.js",
-    "dev": "echo \"This command has been deprecated. Use 'npm start'\" && exit 1",
+    "start": "set NODE_ENV=development && concurrently \"npm run server\" \"npm run client\"",
+    "server": "nodemon index.js",
+    "client": "npm run start --prefix client",
+    "build": "set NODE_ENV=production && nodemon index.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
     "lint": "eslint ."
   },
   "devDependencies": {

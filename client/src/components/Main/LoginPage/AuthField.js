@@ -7,7 +7,7 @@ const AuthField = ({ input, label, type, icon, meta: { error, touched } }) => {
       <i className="material-icons prefix">{icon}</i>
       <input {...input} type={type} required className={validateClass} style={{ marginBottom: '5px' }} />
       <label htmlFor="icon_prefix" className="control-label">{label}</label>
-      <div className="error red-text" style={{ marginBottom: '10px' }}>
+      <div className="error red-text">
         {touched && error}
       </div>
     </div>
