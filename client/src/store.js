@@ -1,20 +1,13 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import { Provider } from 'react-redux';
 import ReduxThunk from 'redux-thunk';
 import reducer from './reducers';
 import * as Constants from './constants';
 
 const initState = {
-  user: {
-    authentication: true,
-    userName: 'GuoXiaoyang',
-    userId: '111',
-  },
   ui: {
     sidebarVisibility: false,
     dropdownVisibility: false,
-    currentIndex: Constants.OneLoadNums,
-    activeLink: '/',
+    currentIndex: Constants.OneLoadNums
   },
   polls: [
     {

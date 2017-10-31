@@ -1,0 +1,11 @@
+export const AUTH_USER = 'AUTH_USER';
+export const UNAUTH_USER = 'UNAUTH_USER';
+export const AUTH_ERROR = 'AUTH_ERROR';
+export const FETCH_MESSAGE = 'FETCH_MESSAGE';
+export const TOGGLE_SIDE = 'TOGGLE_SIDE';
+export const TOGGLE_DROPDOWN = 'TOGGLE_DROPDOWN';
+export const LOAD_MORE = 'LOAD_MORE';
+export const SWITCH_ACTIVE = 'SWITCH_ACTIVE';
+export const FETCH_MYPOLLS = 'FETCH_MYPOLLS';
+export const FETCH_ALLPOLLS = 'FETCH_ALLPOLLS';
+export const CLEAR_ERROR = 'CLEAR_ERROR';

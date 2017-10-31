@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ActiveNavLink from './ActiveNavLink';
-import * as actionCreators from '../../actions';
+import * as actions from '../../actions/types';
+import * as actionCreators from '../../actions/index';
 
 const mapStateToProps = (state) => (
   Object.assign({},{
@@ -14,14 +15,19 @@ const mapStateToProps = (state) => (
 )
 
 const mapDispatchToProps = (dispatch) => ({
-  toggleSidebar: (boolean) => dispatch(actionCreators.toggleSideVisibility(boolean)),
-  toggleDropdown: (boolean) => dispatch(actionCreators.toggleDropdownVisibility(boolean)),
-  switchActive: (path) => dispatch(actionCreators.activeLink(path))
+  toggleSidebar: boolean => dispatch(actionCreators.toggleSideVisibility(boolean)),
+  toggleDropdown: boolean => dispatch(actionCreators.toggleDropdownVisibility(boolean)),
+  switchActive: path => dispatch(actionCreators.activeLink(path)),
+  signoutUser: () => {
+    localStorage.removeItem('token');
+    dispatch({ type: actions.UNAUTH_USER });
+  }
 });
 
 
-const Header = ({user, toggleSidebar, toggleDropdown, dropdownVisibility, sidebarVisibility, switchActive}) => {
-
+const Header = props => {
+  const { user, dropdownVisibility, sidebarVisibility} = props;
+  const { toggleSidebar, toggleDropdown, switchActive, signoutUser} = props;
   const hideSide = () => {
     toggleSidebar(false);
     document.removeEventListener('click', hideSide);
@@ -44,7 +50,6 @@ const Header = ({user, toggleSidebar, toggleDropdown, dropdownVisibility, sideba
     document.addEventListener('click', hideDrop);
   }
   const toggleDrop = (e) => {
-    console.log('show drop');
     if (dropdownVisibility) {
       toggleDropdown(false);
     } else {
@@ -60,14 +65,15 @@ const Header = ({user, toggleSidebar, toggleDropdown, dropdownVisibility, sideba
       return (
         <div className="hide-on-med-and-down dropdownContainer">
           <div className="seperator"></div>
-          <Link to="/logout" className="waves-effect btn">Log Out</Link>
+          {/* <Link to="/logout" className="waves-effect btn">Log Out</Link> */}
+          <a className="waves-effect btn" onClick={() => signoutUser()}>Log Out</a>
         </div>
       );
     }
     if (type === 'mobile') {
       return (
         <li>
-          <Link to="/logout" className="waves-effect btn">Log Out</Link>
+          <a className="waves-effect btn" onClick={() => signoutUser()}>Log Out</a>
         </li>
       );
     }
@@ -112,7 +118,7 @@ const Header = ({user, toggleSidebar, toggleDropdown, dropdownVisibility, sideba
                 <span className="title-last">OTING</span>
               </span>
             </Link> 
-            <a href="#" className="button-collapse" onClick={()=>{showSide()}}>
+            <a className="button-collapse" onClick={()=>{showSide()}}>
               <i className="material-icons">menu</i>
             </a>       
             <ul id="nav-mobile" className="right hide-on-med-and-down">

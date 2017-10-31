@@ -11,7 +11,6 @@ const validate = values => {
   } else {
     const candidatesArrayErrors = [];
     values.candidates.forEach((candidate, candidateIndex) => {
-      const candidateErrors = {};
       if (!candidate) {
         candidatesArrayErrors[candidateIndex] = 'You must provide a value';
       }

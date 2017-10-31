@@ -1,6 +1,7 @@
-require("babel-register");
 const app = require('./app');
 require('dotenv').config();
+
+
  
 app.listen(process.env.SERVER_PORT || 5000, (err) => {
   if (err) {

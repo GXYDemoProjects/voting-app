@@ -1,15 +1,8 @@
 import React from 'react';
-import { Field, FieldArray, reduxForm } from 'redux-form';
-
-const RadioField = ({ input, name, id, value, index }) => (
-  <div>
-    <input {...input} className="with-gap" value={value} name={name} type="radio" id={id} />
-    <label htmlFor={id}>{value}</label>
-  </div>
-);
+import { Field, reduxForm } from 'redux-form';
 
 const SelectionForm = props => {
-  const { handleSubmit, pristine, reset, submitting} = props;
+  const { handleSubmit, pristine, submitting} = props;
   return (
     <div className="selection">
       <h5>{props.title}</h5> 

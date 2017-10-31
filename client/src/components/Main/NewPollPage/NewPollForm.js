@@ -31,7 +31,7 @@ const renderCandidates = ({ fields, meta: { error, submitFailed } }) => {
 
 
 const NewPollForm = props => {
-  const { handleSubmit, pristine, reset, submitting } = props;
+  const { handleSubmit, submitting } = props;
   return (
     <form onSubmit={handleSubmit(() => {console.log(true)})}>
       {

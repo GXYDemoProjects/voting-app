@@ -11,7 +11,7 @@ class Logout extends React.Component {
   componentWillMount() {
     // logout
     this.props.logout();
-    this.props.history.push('/');
+    this.props.history.push('/allpolls');
   }
   render() {
     return null;
