@@ -227,3 +227,12 @@ input:focus ~ .control-label, input:valid ~ .control-label {
   padding: 20px;
   margin: 20px 20px 20px 6px;
 }
+
+.selection {
+  margin-top: 50px;
+  text-align: left;
+}
+
+.btn-selection {
+  margin-top: 40px;
+}

@@ -10,9 +10,9 @@ const PreviewForm = ({ values }) => {
         <p>Options</p>
         <form action="#">
           {values.candidates.map((candidate, index) => (
-            <div>
-              <input class="with-gap" name="group" type="radio" id={`candidate${index}`} key={index}/>
-              <label for={`candidate${index}`}>{candidate}</label>
+            <div key={index}>
+              <input className="with-gap" name="group" type="radio" id={`candidate${index}`} />
+              <label htmlFor={`candidate${index}`}>{candidate}</label>
             </div>
           ))}
         </form>

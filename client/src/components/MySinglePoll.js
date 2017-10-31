@@ -1,9 +1,8 @@
 import React from 'react';
+import SinglePoll from './SinglePoll';
 
 const MySinglePoll = ({ match }) => (
-  <div className="container">
-    My Single Poll, id:{match.params.id}
-  </div>
+  <SinglePoll type="own" match={match} />
 );
 
 export default MySinglePoll;
