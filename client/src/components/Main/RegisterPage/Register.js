@@ -1,5 +1,5 @@
 import React from 'react';
-import AuthContainer from './AuthContainer';
+import AuthContainer from '../LoginPage/AuthContainer';
 import RegisterForm from './RegisterForm';
 
 const Register = () => {

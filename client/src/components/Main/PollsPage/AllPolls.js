@@ -4,7 +4,7 @@ import MoreButton from './MoreButton';
 import ToUpButton from './ToTopButton';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actionCreators from '../actions';
+import * as actionCreators from '../../../actions';
 
 const mapStateToProps = (state) => (
   Object.assign({},{

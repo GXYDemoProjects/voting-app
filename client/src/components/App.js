@@ -4,16 +4,16 @@ import PropTypes from 'prop-types';
 // import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // import { connect } from 'react-redux';
 
-import Header from './Header';
-import Footer from './Footer';
-import AllPolls from './AllPolls';
-import MyPolls from './MyPolls';
-import NewPoll from './NewPoll';
-import Login from './Login';
-import Register from './Register';
-import Logout from './Logout';
-import SinglePoll from './SinglePoll';
-import MySinglePoll from './MySinglePoll';
+import Header from './Header/Header';
+import Footer from './Footer/Footer';
+import AllPolls from './Main/PollsPage/AllPolls';
+import MyPolls from './Main/PollsPage/MyPolls';
+import NewPoll from './Main/NewPollPage/NewPoll';
+import Login from './Main/LoginPage/Login';
+import Register from './Main/RegisterPage/Register';
+import Logout from './Main/Logout';
+import SinglePoll from './Main/SinglePollPage/SinglePoll';
+import MySinglePoll from './Main/SinglePollPage/MySinglePoll';
 import '../styles/App.css';
 
 

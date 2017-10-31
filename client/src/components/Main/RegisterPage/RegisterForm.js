@@ -1,7 +1,7 @@
 import React from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { Link } from 'react-router-dom';
-import AuthField from './AuthField';
+import AuthField from '../LoginPage/AuthField';
 
 const formFields = [
   { label: 'Email', name: 'registerEmail', type:'text', icon: 'email' },

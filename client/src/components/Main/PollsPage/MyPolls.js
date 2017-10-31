@@ -2,7 +2,7 @@ import React from 'react';
 import CardGrid from './CardGrid';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actionCreators from '../actions';
+import * as actionCreators from '../../../actions';
 
 const mapStateToProps = (state) => (
   Object.assign({},{

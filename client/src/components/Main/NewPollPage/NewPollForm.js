@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field, FieldArray, reduxForm } from 'redux-form';
-import AuthField from './AuthField';
-import validate from '../utils/validate';
+import AuthField from '../LoginPage/AuthField';
+import validate from '../../../utils/validate';
 
 const formFields = [
   { label: 'Title', name: 'title', type:'text', icon: 'loyalty' },

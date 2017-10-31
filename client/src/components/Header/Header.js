@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ActiveNavLink from './ActiveNavLink';
-import * as actionCreators from '../actions';
+import * as actionCreators from '../../actions';
 
 const mapStateToProps = (state) => (
   Object.assign({},{
@@ -106,15 +106,15 @@ const Header = ({user, toggleSidebar, toggleDropdown, dropdownVisibility, sideba
       <nav>
         <div className="container">
           <div className="nav-wrapper">
-            <Link to="/" className="brand-logo">
+            <Link to="/allpolls" className="brand-logo">
               <span className="title">
                 <span className="title-first">V</span>
                 <span className="title-last">OTING</span>
               </span>
             </Link> 
-            <Link to="/" className="button-collapse" onClick={()=>{showSide()}}>
+            <a href="#" className="button-collapse" onClick={()=>{showSide()}}>
               <i className="material-icons">menu</i>
-            </Link>       
+            </a>       
             <ul id="nav-mobile" className="right hide-on-med-and-down">
               <ActiveNavLink switchActive={switchActive} to="/allpolls" activeOnlyWhenExact={true} label="Home" className="item"/>
               {/* <ActiveNavLink switchActive={switchActive} to="/mypolls" label="My Polls" className="item"/> */}
