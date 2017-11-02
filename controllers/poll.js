@@ -1,28 +1,28 @@
 const Poll = require('../models/poll');
 const Vote = require('../models/vote');
 
-const singlePollData = (doc, user) => {
-  console.log('doc:', doc);
-  const arrVotes = [['candidate', 'number']];
-  const votes = {};
-  doc.recipients.forEach(recipient => {
-    votes[recipient.respond] = (votes[doc.respond] || 0) + 1;
-  });
-  for(let item of votes) {
-    console.log('item:', item);
-    arrVotes.push([item, votes[item]]);
-  }
-  const { _id, title, description } = doc;
-  const res = {
-    pollId: _id,
-    title,
-    description,
-    data: arrVotes,
-    currentUser: !!user
-  };
-  console.log('res:', res);
-  return res;
-}
+// const singlePollData = (doc, user) => {
+//   console.log('doc:', doc);
+//   const arrVotes = [['candidate', 'number']];
+//   const votes = {};
+//   doc.recipients.forEach(recipient => {
+//     votes[recipient.respond] = (votes[doc.respond] || 0) + 1;
+//   });
+//   for(let item of votes) {
+//     console.log('item:', item);
+//     arrVotes.push([item, votes[item]]);
+//   }
+//   const { _id, title, description } = doc;
+//   const res = {
+//     pollId: _id,
+//     title,
+//     description,
+//     data: arrVotes,
+//     currentUser: !!user
+//   };
+//   console.log('res:', res);
+//   return res;
+// }
 
 const getVotes = pollId => {
   return Vote
@@ -35,17 +35,13 @@ const getVotes = pollId => {
   })
 };
 
-const voteWithId = (type, user, pollId, value) => {
-  const query = type === 'user' ? {_poll:pollId, vote_user: user._id} : {_poll:pollId, vote_ip:user};
-
-};
 
 // new poll
 // post withAuth
 exports.newpoll = (req, res, next) => {
   console.log('req.user:', req.user);
   if(!req.user) {
-    return res.status(422).send({error: 'Unauthorized'});
+    return res.status(401).send({error: 'Unauthorized'});
   }
   const { title, description, candidates } = req.body;
   console.log('title, description, candidates:', title, description, candidates);
