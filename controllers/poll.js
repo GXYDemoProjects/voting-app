@@ -101,7 +101,7 @@ exports.singlepoll = async (req, res, next) => {
 // get my polls withAuth
 exports.mypolls = (req, res, next) => {
   if(!req.user) {
-    return res.status(422).send({error: 'Unauthorized'});
+    return res.status(401).send({error: 'Unauthorized'});
   }
   Poll
   .find({_user: req.user.id})
