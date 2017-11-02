@@ -3,24 +3,22 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const authRouter = require('./routes/auth');
+const router = require('./routes/index');
 const app = express();
-// import './config/database';
-// import middlewareConfig from './config/middleware';
-// DB Setup
+// import './config/database'; import middlewareConfig from
+// './config/middleware'; DB Setup
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGO_URL, {useMongoClient: true});
 // App Setup
 app.use(morgan('combined'));
 app.use(cors());
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 
 // parse application/json
 app.use(bodyParser.json());
-app.use('/api',authRouter);
+app.use('/api', router);
 
-// express.use(static)
-// middlewareConfig(app);
+// express.use(static) middlewareConfig(app);
 
-module.exports =  app;
+module.exports = app;

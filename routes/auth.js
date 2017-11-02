@@ -1,12 +1,16 @@
 const router = require('express').Router();
-const Authentication = require('../controllers/authentication');
-const passportService = require('../services/passport');
-const passport = require('passport');
+const authController = require('../controllers/authentication');
+const requireSignin = require('../middlewares/passport').requireSignin;
+const requireAuth = require('../middlewares/passport').requireAuth;
 
-const requireSignin = passport.authenticate('local', { session: false });
-
-router.post('/signin', requireSignin, Authentication.signin);
-router.post('/signup', Authentication.signup);
+router.post('/signin', requireSignin, authController.signin);
+router.post('/signup', authController.signup);
+router.get('/auth', requireAuth, (req, res) => {
+  if(!req.user) {
+    return res.status(401).send({error: 'Unauthorized'});
+  }
+  res.json({message: 'Token Auth success'});
+})
 
 
 module.exports = router;

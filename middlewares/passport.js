@@ -27,7 +27,6 @@ const localLogin = new LocalStrategy(localOptions, function(email, password, don
 });
 
 // Setup options for JWT Strategy
-console.log('process.env.SECRET:', process.env.SECRET);
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromHeader('authorization'),
   secretOrKey: process.env.SECRET
@@ -40,7 +39,6 @@ const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
   // otherwise, call done without a user object
   User.findById(payload.sub, function(err, user) {
     if (err) { return done(err, false); }
-
     if (user) {
       done(null, user);
     } else {
@@ -49,6 +47,35 @@ const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
   });
 });
 
+
+
 // Tell passport to use this strategy
 passport.use(jwtLogin);
 passport.use(localLogin);
+
+const requireSignin = passport.authenticate('local', { session: false });
+const requireAuth = (req, res, next) => {
+  console.log('req:', req);
+  passport.authenticate('jwt', { session: false }, (err, payload, info) => {
+    console.log('err,payload:', err,payload);
+    if(err) {
+      next(err);
+    }
+    if(payload) {
+      console.log('payload:', payload);
+      req.user = payload;
+    }
+    next();
+  })(req, res, next);
+}
+
+// const requireAuth = passport.authenticate('jwt', { session: false }, (err, payload) => {
+//   if(err) {
+//     res.status(401).send({error: 'Unauthorized'});
+//   }
+//   console.log('err:', err);
+//   console.log('payload:', payload);
+// });
+
+exports.requireSignin = requireSignin;
+exports.requireAuth = requireAuth;

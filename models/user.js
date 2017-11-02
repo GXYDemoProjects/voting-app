@@ -5,8 +5,8 @@ const bcrypt = require('bcrypt-nodejs');
 // Define our model
 const userSchema = new Schema({
   email: { type: String, unique: true, lowercase: true },
-  userName: String,
-  password: String
+  userName: { type: String, required: true },
+  password: { type: String, required: true }
 });
 
 // On Save Hook, encrypt password
