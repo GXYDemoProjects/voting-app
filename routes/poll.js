@@ -16,7 +16,7 @@ router.get('/mypolls', requireAuth, pollController.mypolls);
 router.get('/polls/:pollId', requireAuth, pollController.singlepoll);
 
 // vote for single poll
-router.post('/:pollId/vote/:value', requireAuth, pollController.vote);
+router.post('/polls/:pollId/vote', requireAuth, pollController.vote);
 
 // delete single poll
 router.delete('/:pollId', requireAuth, authPoll, pollController.deletePoll);

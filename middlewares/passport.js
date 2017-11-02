@@ -55,14 +55,12 @@ passport.use(localLogin);
 
 const requireSignin = passport.authenticate('local', { session: false });
 const requireAuth = (req, res, next) => {
-  console.log('req:', req);
   passport.authenticate('jwt', { session: false }, (err, payload, info) => {
     console.log('err,payload:', err,payload);
     if(err) {
       next(err);
     }
     if(payload) {
-      console.log('payload:', payload);
       req.user = payload;
     }
     next();

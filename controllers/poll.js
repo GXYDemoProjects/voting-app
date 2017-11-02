@@ -1,3 +1,4 @@
+const ObjectId = require('mongoose').Types.ObjectId;
 const Poll = require('../models/poll');
 const Vote = require('../models/vote');
 
@@ -25,17 +26,28 @@ const Vote = require('../models/vote');
 // }
 
 const getVotes = (pollId, candidates) => {
+  let voteDefault = {};
+  candidates.forEach(candidate => voteDefault[candidate] = 0);
   return Vote
-  .find({ _poll: pollId })
-  .aggregate({ $group:{_id:"$respond", number:{$sum: 1}} })
+  // .find({ _poll: pollId })
+  .aggregate([
+    { $match: { _poll: ObjectId(pollId) } },
+    { 
+      $group:{_id:'$respond', number:{$sum: 1}} 
+    }
+  ])
   .exec()
   .then(voteDoc => {
     console.log('voteDoc:', voteDoc);
-    candidates.forEach(candidate => {
-      voteDoc[candidate] = voteDoc[candidate] || 0;
-    });
-    console.log('voteDoc:', voteDoc);
-    return voteDoc.json();
+    let vote = {};
+    voteDoc.forEach(singleVote => vote[singleVote._id] = singleVote.number);
+    console.log('voteDefault:', voteDefault);
+    vote = {...voteDefault, ...vote};
+    console.log('vote:', vote);
+    return vote;
+  })
+  .catch(err => {
+    console.log('err:', err);
   })
 };
 
@@ -73,13 +85,16 @@ exports.allpolls = (req, res, next) => {
 
 // get single poll, return poll
 // get withAuth
-exports.singlepoll = async (req, res, next) => {
+exports.singlepoll = (req, res, next) => {
   const pollId = req.params.pollId;
   const user = req.user;
+  console.log('pollId:', pollId);
+  console.log('user:', user);
+  
   let singlePollData = {currentUser: !!user};
   Poll
   .findById(pollId)
-  .select('_id title description')
+  .select('_id title description candidates')
   .exec()
   .then(pollDoc => {
     console.log('pollDoc:', pollDoc);
@@ -89,11 +104,11 @@ exports.singlepoll = async (req, res, next) => {
       title : pollDoc.title,
       description : pollDoc.description
     };
-    return getVotes(pollId, pollDoc.candidates);
-  })
-  .then(votes => {
-    singlePollData.data = votes;
-    res.json(singlePollData);
+    getVotes(pollId, pollDoc.candidates)
+    .then(votes => {
+      singlePollData.data = votes;
+      res.json(singlePollData);
+    })
   })
   .catch(err => res.status(422).send(err));
 };
@@ -117,10 +132,10 @@ exports.vote = (req, res, next) => {
   const pollId = req.params.pollId;
   const ip = req.header('x-forwarded-for') || req.connection.remoteAddress;
   const user = req.user;
-  const value = req.params.value;
-  let singlePollData = {currentUser: !!user};
+  const value = req.body.voteValue;
+  let singlePollData = {};
   if(!req.user && !ip) {
-    return res.status(422).send({error: 'Unauthorized'});
+    return res.status(401).send({error: 'Unauthorized'});
   }
   
   Poll
@@ -154,14 +169,17 @@ exports.vote = (req, res, next) => {
         });
         vote
         .save()
-        .then(() => getVotes(pollId))
-        .then(votes => {
-          singlePollData.data = votes;
-          res.json(singlePollData);
+        .then(() => {
+            getVotes(pollId, pollDoc.candidates)
+            .then(votes => {
+              singlePollData.data = votes;
+              res.json(singlePollData);
+            })
         })
-        .catch(err => res.status(422).send(err));
       })
+      .catch(err => res.status(422).send(err));
     } else if(ip) {
+      console.log('ip:', ip);
       Vote
       .findOne({_poll : pollId, vote_ip: ip})
       .then(voteDoc => {
@@ -169,19 +187,22 @@ exports.vote = (req, res, next) => {
           return res.status(422).send({error: 'You have voted for this poll with this ip'});
         }
         const vote = new Vote({
-          vote_user: user._id,
+          vote_ip: ip,
           respond: value,
           _poll: pollId
         });
         vote
         .save()
-        .then(() => getVotes(pollId))
-        .then(votes => {
-          singlePollData.data = votes;
-          res.json(singlePollData);
+        .then(() => {
+          getVotes(pollId, pollDoc.candidates)
+          .then(
+          votes => {
+            singlePollData.data = votes;
+            res.json(singlePollData);
+          })
         })
-        .catch(err => res.status(422).send(err));
       })
+      .catch(err => res.status(422).send(err));
     }
   })
   .catch(err => res.status(422).send(err));

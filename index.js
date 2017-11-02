@@ -1,6 +1,6 @@
 const app = require('./app');
 require('dotenv').config();
-
+// require('./test');
 
  
 app.listen(process.env.SERVER_PORT || 5000, (err) => {
