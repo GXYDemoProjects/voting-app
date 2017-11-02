@@ -24,12 +24,16 @@ const Vote = require('../models/vote');
 //   return res;
 // }
 
-const getVotes = pollId => {
+const getVotes = (pollId, candidates) => {
   return Vote
   .find({ _poll: pollId })
   .aggregate({ $group:{_id:"$respond", number:{$sum: 1}} })
   .exec()
   .then(voteDoc => {
+    console.log('voteDoc:', voteDoc);
+    candidates.forEach(candidate => {
+      voteDoc[candidate] = voteDoc[candidate] || 0;
+    });
     console.log('voteDoc:', voteDoc);
     return voteDoc.json();
   })
@@ -85,7 +89,7 @@ exports.singlepoll = async (req, res, next) => {
       title : pollDoc.title,
       description : pollDoc.description
     };
-    return getVotes(pollId);
+    return getVotes(pollId, pollDoc.candidates);
   })
   .then(votes => {
     singlePollData.data = votes;
