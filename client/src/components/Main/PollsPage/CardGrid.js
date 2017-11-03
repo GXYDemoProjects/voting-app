@@ -6,8 +6,6 @@ const CardGrid = ({ polls, currentIndex, type }) => {
     return null;
   }
   const loadPolls = polls.slice(0, currentIndex || polls.length);
-  console.log(currentIndex);
-  console.log(loadPolls);
   return (
     <div className="container">
       <div className="row">

@@ -6,6 +6,8 @@ const ROOT_URL = 'http://localhost:5000/api';
 
 export const signinUser = (email, password) => {
   return dispatch => { 
+    email = email.trim();
+    password = password.trim();
     dispatch({type: actions.CLEAR_ERROR});
     // Submit email/password to the server
     axios.post(`${ROOT_URL}/signin`, { email, password })
@@ -13,7 +15,6 @@ export const signinUser = (email, password) => {
         // If request is good...
         // - Update state to indicate user is authenticated
         localStorage.setItem('token', response.data.token);
-        console.log('set token', localStorage.getItem('token'));
         dispatch({ type: actions.AUTH_USER, payload: response.data.userName });
         // - Save the JWT token
         // - redirect to the route '/feature'
@@ -21,7 +22,6 @@ export const signinUser = (email, password) => {
       .catch(err => {
         // If request is bad...
         // - Show an error to the user
-        console.log('err:', err.response);
         dispatch({type:actions.AUTH_ERROR, payload:'Your password or email may be wrong'})
       });
   }
@@ -29,14 +29,15 @@ export const signinUser = (email, password) => {
 
 export const signupUser = (userName, email, password) => {
   return dispatch => {
+    userName = userName.trim();
+    email = email.trim();
+    password = password.trim();
     axios.post(`${ROOT_URL}/signup`, { userName, email, password })
       .then(response => {
-        console.log('response.data:', response.data);
         dispatch({ type: actions.AUTH_USER, payload: response.data.userName });
         localStorage.setItem('token', response.data.token);
       })
       .catch(err => {
-        console.log('err:', err.response);
         dispatch({ type:actions.AUTH_ERROR, payload:err.response.data.error })
       });
   }

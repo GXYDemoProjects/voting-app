@@ -32,7 +32,7 @@ class LoginForm extends React.Component {
     this.props.signinUser(email, password);
   }
   render() {
-    const { handleSubmit, signinUser, pristine, submitting, authError } = this.props;
+    const { handleSubmit, pristine, submitting, authError } = this.props;
     return (
       <div className="form">
         <h5 style={{marginTop: '50px'}}>Sign in to Your Account</h5>

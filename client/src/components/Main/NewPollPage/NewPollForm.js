@@ -30,7 +30,7 @@ const renderCandidates = ({ fields, meta: { error, submitFailed } }) => {
         label={`Candidate${index+1}`} name={candidate} />
       </li>
     ))}
-    {submitFailed && error && <span className="error red-text">{error}</span>}
+    {submitFailed && error && <div className="error red-text">{error}</div>}
   </ul>
 )};
 

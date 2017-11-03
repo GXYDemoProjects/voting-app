@@ -27,8 +27,6 @@ const ui = (state = initialUI, action) => {
       return {...state, sidebarVisibility: action.status};
     case actions.LOAD_MORE:
       return {...state, currentIndex: state.currentIndex + Constants.OneLoadNums};
-    case actions.SWITCH_ACTIVE:
-      return {...state, activeLink: action.payload}
     case actions.UNAUTH_USER: 
       return {...state, dropdownVisibility: false}
     case actions.TOGGLE_MODAL:

@@ -8,9 +8,7 @@ import * as uiActions from '../../../actions/uiActions';
 import * as errorActions from '../../../actions/errorActions';
 
 class AllPolls extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+
   componentDidMount() {
     this.props.fetchAllPolls();
   }
@@ -21,7 +19,6 @@ class AllPolls extends React.Component {
   
   render() {
     const { polls, currentIndex, loadMore } = this.props;
-    console.log(polls);
     return (
       <main>
         <CardGrid polls={polls} currentIndex={currentIndex} />

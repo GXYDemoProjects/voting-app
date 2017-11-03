@@ -1,12 +1,12 @@
 import React from 'react';
-import { Link, Route, withRouter, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 const ActiveNavLink = ({ label, to, currentLocation, className }) => (
   <li className={`${className} ${currentLocation===to?'active':''}`}>
-    <NavLink to={to} >
+    <Link to={to} >
     {label}
-    </NavLink> 
+    </Link> 
   </li>
   // <Route path={to} exact={activeOnlyWhenExact} children={({ match }) => {
   //   // console.log('match:', match);

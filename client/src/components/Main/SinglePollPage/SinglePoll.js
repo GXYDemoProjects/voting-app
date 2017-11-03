@@ -8,7 +8,6 @@ import * as uiActions from '../../../actions/uiActions';
 import Chart from './Chart';
 import SelectionForm from './SelectionForm';
 import Modal from './Modal';
-import Error from '../LoginPage/Error';
 
 class SinglePoll extends React.Component{
   constructor(props) {

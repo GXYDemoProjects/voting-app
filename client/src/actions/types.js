@@ -5,7 +5,6 @@ export const UNAUTH_USER = 'UNAUTH_USER';
 export const TOGGLE_SIDE = 'TOGGLE_SIDE';
 export const TOGGLE_DROPDOWN = 'TOGGLE_DROPDOWN';
 export const LOAD_MORE = 'LOAD_MORE';
-export const SWITCH_ACTIVE = 'SWITCH_ACTIVE';
 export const TOGGLE_MODAL = 'TOGGLE_MODAL';
 export const CLEAR_ERROR = 'CLEAR_ERROR';
 

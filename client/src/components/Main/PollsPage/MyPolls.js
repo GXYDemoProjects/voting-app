@@ -5,9 +5,7 @@ import * as pollActions from '../../../actions/pollActions';
 import * as errorActions from '../../../actions/errorActions';
 
 class MyPolls extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+
   componentDidMount() {
     this.props.fetchMyPolls();
   }

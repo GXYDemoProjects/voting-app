@@ -2,7 +2,6 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import logger from 'redux-logger';
 import reducer from './reducers';
-import * as Constants from './constants';
 
 
 

@@ -23,7 +23,7 @@ class App extends React.Component {
   render() {    
     return (
       <div className="app">
-        <Header />
+        <Header currentLocation={this.props.history.location.pathname}/>
         <Route exact path="/" component={AllPolls} />
         <Route exact path="/allpolls" component={AllPolls} />
         <Route path="/polls/:id" component={SinglePoll} />

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ActiveNavLink from './ActiveNavLink';
 import * as authActions from '../../actions/authActions';
 import * as uiActions from '../../actions/uiActions';
@@ -27,7 +27,7 @@ const actions = {...authActions, ...uiActions};
 
 const Header = props => {
   const { user, dropdownVisibility, sidebarVisibility} = props;
-  const { toggleSidebar, toggleDropdown, switchActive, signoutUser} = props;
+  const { toggleSidebar, toggleDropdown, signoutUser} = props;
   const hideSide = () => {
     toggleSidebar(false);
     document.removeEventListener('click', hideSide);
@@ -86,7 +86,7 @@ const Header = props => {
       return e => toggleDrop(e);
     }
   }
-  const currentLocation = props.history.location.pathname;
+  const currentLocation = props.currentLocation;
   const loggedIn = (type) => {
     return (
     <span>
@@ -151,4 +151,4 @@ const Header = props => {
 
 
 const HeaderContainer = connect(mapStateToProps, actions)(Header);
-export default withRouter(HeaderContainer);
+export default HeaderContainer;

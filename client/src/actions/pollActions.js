@@ -59,6 +59,9 @@ export const fetchCurrentPoll = pollId => {
 
 export const newPoll = (title, description, candidates) => {
   return dispatch => {
+    title = title.trim();
+    description = description.trim();
+    candidates = candidates.map(candidate => candidate.trim());
     _axios.post('/newpoll', {title, description, candidates},
     {headers: { authorization: localStorage.getItem('token') }})
     .then(res => {
@@ -70,6 +73,7 @@ export const newPoll = (title, description, candidates) => {
 
 export const vote = (pollId, voteValue) => {
   return dispatch => {
+    voteValue = voteValue.trim();
     _axios.post(`/polls/${pollId}/vote`, {voteValue},
     {headers: { authorization: localStorage.getItem('token') }})
     .then(response => {

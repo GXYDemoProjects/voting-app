@@ -1,7 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import Error from '../LoginPage/Error';
-import { Field, reduxForm, formValueSelector } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 
 class SelectionForm extends React.Component {
 
