@@ -28,7 +28,6 @@ class LoginForm extends React.Component {
   }
   signIn() {
     const { email, password } = this.props.values;
-    console.log('email,password:', email,password);
     this.props.signinUser(email, password);
   }
   render() {

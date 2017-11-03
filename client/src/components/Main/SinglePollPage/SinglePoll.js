@@ -41,7 +41,6 @@ class SinglePoll extends React.Component{
   formatData(originalVotes) {
     let formatVotes = [['item', 'number']];
     originalVotes.forEach(item => formatVotes.push([item.respond, item.number]))
-    console.log('formatVotes:', formatVotes);
     return formatVotes;
   }
   render() {

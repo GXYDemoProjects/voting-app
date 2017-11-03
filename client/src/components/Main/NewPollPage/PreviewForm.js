@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 const PreviewForm = ({ values }) => {
-  console.log('values:', values);
   const renderRadios = values => {
     if(!values || !values.candidates) {return null;}
     return (

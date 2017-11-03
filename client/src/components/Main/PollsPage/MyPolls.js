@@ -13,7 +13,11 @@ class MyPolls extends React.Component {
     this.props.clearPolls();
     this.props.removeErrors();
   }
-  
+  componentWillReceiveProps(nextProps) {
+    if(!nextProps.authentication) {
+      this.props.history.push(`/polls/${allpolls}`);
+    }
+  }
   render() {
     return (
       <main>
@@ -25,6 +29,7 @@ class MyPolls extends React.Component {
 
 const mapStateToProps = state => ({
   polls: state.polls,
+  authentication: state.user.authentication
 });
 const actions = {...pollActions, ...errorActions};
 

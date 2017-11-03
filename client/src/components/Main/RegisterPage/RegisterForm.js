@@ -77,6 +77,9 @@ const validate = (values) => {
   if(values.confirmPassword !== values.password) {
     errors.confirmPassword = 'Password do not match';
   }
+  if(values.userName && !values.userName.trim()) {
+    errors.userName = 'Username should not be empty';
+  }
   formFields.forEach(({ name }) => {
     if (!values[name]) {
       errors[name] = 'You must provide a value';

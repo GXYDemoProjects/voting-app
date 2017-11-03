@@ -20,10 +20,8 @@ const initialUI = {
 const ui = (state = initialUI, action) => {
   switch(action.type) {
     case actions.TOGGLE_DROPDOWN:
-      console.log('toggle dropdown');
       return {...state, dropdownVisibility: action.status};
     case actions.TOGGLE_SIDE:
-      console.log('toggle side');
       return {...state, sidebarVisibility: action.status};
     case actions.LOAD_MORE:
       return {...state, currentIndex: state.currentIndex + Constants.OneLoadNums};

@@ -5,7 +5,7 @@ const validateRepetion = candidates => {
       removeEmptyCandidates.push(candidate.trim());
     }
   });
-  console.log('removeEmptyCandidates:', removeEmptyCandidates);
+  // console.log('removeEmptyCandidates:', removeEmptyCandidates);
   if(removeEmptyCandidates.length === 0) {
     return false;
   }

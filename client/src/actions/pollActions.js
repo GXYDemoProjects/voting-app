@@ -24,7 +24,6 @@ export const fetchAllPolls = () => {
 
 export const fetchMyPolls = () => {
   return dispatch => {
-    console.log('token:', localStorage.getItem('token'));
     _axios.get(`/mypolls`,
     {headers: { authorization: localStorage.getItem('token') }})
     .then(res => {
@@ -34,7 +33,7 @@ export const fetchMyPolls = () => {
       });
     })
     .catch(err => {
-      console.log('err:', err);
+      // console.log('err:', err);
       dispatch({type: actions.POLL_ERROR, payload: err.response.data.error})
     });
   }
@@ -47,7 +46,6 @@ export const fetchCurrentPoll = pollId => {
     _axios.get(`/polls/${pollId}`,
     {headers: { authorization: localStorage.getItem('token') }})
     .then(res => {
-      console.log('res:', res);
       dispatch({
         type: actions.UPDATE_CURRENT,
         payload: res.data
@@ -82,7 +80,7 @@ export const vote = (pollId, voteValue) => {
       })
     })
     .catch(err => {
-      console.log('err:', err.response);
+      // console.log('err:', err.response);
       dispatch({type: actions.POLL_ERROR, payload: err.response.data.error})
     });
   };
@@ -97,7 +95,7 @@ export const deletePoll = pollId => {
       dispatch({type: actions.TOGGLE_MODAL, status: false});
     })
     .catch(err => {
-      console.log('err:', err);
+      // console.log('err:', err);
       dispatch({type: actions.POLL_ERROR, payload: err.response.data.error});
     });
   }

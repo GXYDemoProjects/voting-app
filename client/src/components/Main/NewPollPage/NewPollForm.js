@@ -41,10 +41,14 @@ class NewPollForm extends React.Component {
     this.newPoll = this.newPoll.bind(this);
   }
   componentWillReceiveProps(nextProps) {
+    if(!nextProps.authentication) {
+      this.props.history.push(`/polls/${allpolls}`);
+    }
     const newPollId = nextProps.newPollId; 
     if(newPollId) {
       this.props.history.push(`/polls/${newPollId}`);
     }
+
   }
   componentWillUnmount() {
     this.props.removeErrors();
@@ -52,7 +56,6 @@ class NewPollForm extends React.Component {
   }
   newPoll() {
     const { title, description, candidates } = this.props.values;
-    console.log('title, description, candidates:', title, description, candidates);
     this.props.newPoll(title, description, candidates);
   }
   render() {
@@ -78,6 +81,7 @@ const mapStateToProps = state => ({
   newPollId: state.currentPoll.newPollId,
   error: state.authError,
   values: state.form.newPollForm.values,
+  authentication: state.user.authentication
 });
 
 const actions = {...pollActions, ...errorActions};
