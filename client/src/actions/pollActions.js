@@ -33,7 +33,7 @@ export const fetchMyPolls = () => {
       });
     })
     .catch(err => {
-      // console.log('err:', err);
+      console.log('err:', err.response);
       dispatch({type: actions.POLL_ERROR, payload: err.response.data.error})
     });
   }

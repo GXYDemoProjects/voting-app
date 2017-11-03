@@ -43,7 +43,7 @@
   },
   "scripts": {
     "start": "set NODE_ENV=development && concurrently \"npm run server\" \"npm run client\"",
-    "server": "nodemon index.js",
+    "server": "set NODE_ENV=development && nodemon index.js",
     "client": "npm run start --prefix client",
     "build": "set NODE_ENV=production && nodemon index.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",

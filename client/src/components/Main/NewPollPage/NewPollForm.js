@@ -42,7 +42,7 @@ class NewPollForm extends React.Component {
   }
   componentWillReceiveProps(nextProps) {
     if(!nextProps.authentication) {
-      this.props.history.push(`/polls/${allpolls}`);
+      this.props.history.push(`/allpolls`);
     }
     const newPollId = nextProps.newPollId; 
     if(newPollId) {

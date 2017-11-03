@@ -4,7 +4,11 @@ body {
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
 }
-
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
 nav {
   background-color: white
@@ -114,7 +118,8 @@ main .more {
 /* page footer */
 .page-footer {
   text-align: center;
-  
+  margin-top: auto;
+  flex: 0 0 200px;
 }
 .icon {
   width: 30px;
