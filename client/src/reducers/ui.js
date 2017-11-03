@@ -1,18 +1,38 @@
+import * as actions from '../actions/types';
 import * as Constants from '../constants';
-const ui = (state = {}, action) => {
+
+// state = {
+//   dropdownVisibility,
+//   sidebarVisibility,
+//   currentIndex,
+//   activeLink,
+//   modalVisibility
+// }
+
+const initialUI = {
+    sidebarVisibility: false,
+    dropdownVisibility: false,
+    currentIndex: Constants.OneLoadNums,
+    modalVisibility: false,
+    activeLink: ''
+};
+
+const ui = (state = initialUI, action) => {
   switch(action.type) {
-    case 'TOGGLE_DROPDOWN':
+    case actions.TOGGLE_DROPDOWN:
       console.log('toggle dropdown');
       return {...state, dropdownVisibility: action.status};
-    case 'TOGGLE_SIDE':
+    case actions.TOGGLE_SIDE:
       console.log('toggle side');
       return {...state, sidebarVisibility: action.status};
-    case 'LOAD_MORE':
+    case actions.LOAD_MORE:
       return {...state, currentIndex: state.currentIndex + Constants.OneLoadNums};
-    case 'SWITCH_ACTIVE':
-      return {...state, activeLink: action.path}
-    case 'LOGOUT': 
+    case actions.SWITCH_ACTIVE:
+      return {...state, activeLink: action.payload}
+    case actions.UNAUTH_USER: 
       return {...state, dropdownVisibility: false}
+    case actions.TOGGLE_MODAL:
+      return {...state, modalVisibility: action.status}
     default:
       return state;
   }

@@ -9,6 +9,7 @@ const app = express();
 // './config/middleware'; DB Setup
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGO_URL, {useMongoClient: true});
+
 // App Setup
 app.use(morgan('combined'));
 app.use(cors());

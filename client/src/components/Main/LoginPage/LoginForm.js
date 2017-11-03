@@ -2,7 +2,9 @@ import React from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { Link, withRouter } from 'react-router-dom';
 import AuthField from './AuthField';
-import * as dispatchActions from '../../../actions/dispatchAction';
+import Error from './Error';
+import * as authActions from '../../../actions/authActions';
+import * as errorActions from '../../../actions/errorActions';
 import { connect } from 'react-redux';
 
 const formFields = [
@@ -17,9 +19,12 @@ class LoginForm extends React.Component {
     this.signIn = this.signIn.bind(this);
   }
   componentWillReceiveProps() {
-    if(this.props.authError === 'success') {
-      this.props.history.push('/allpolls');
+    if(this.props.authentication) {
+      this.props.history.push('/mypolls');
     }
+  }
+  componentWillUnmount() {
+    this.props.removeErrors();
   }
   signIn() {
     const { email, password } = this.props.values;
@@ -39,12 +44,7 @@ class LoginForm extends React.Component {
               )
             }
           </div>
-          {
-            (authError && authError!=='success') &&       
-            <div className="auth-error red-text">
-            {authError}
-            </div>
-          }
+          <Error error={authError} />
           <button className="btn waves-effect waves-light" type="submit" name="action"  disabled={pristine || submitting}>
             Login
             <i className="material-icons right">send</i>
@@ -78,11 +78,14 @@ const validate = (values) => {
 };
 
 const mapStateToProps = state => ({
-  authError: state.user.error,
+  authentication: state.user.authentication,
+  authError: state.errors.authError,
   values: state.form.loginForm.values
 });
 
-const LoginFormContainer =  withRouter(connect(mapStateToProps, dispatchActions)(LoginForm));
+const actions = {...authActions, ...errorActions};
+
+const LoginFormContainer =  withRouter(connect(mapStateToProps, actions)(LoginForm));
 
 export default reduxForm({
   validate,

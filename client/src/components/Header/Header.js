@@ -2,27 +2,27 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ActiveNavLink from './ActiveNavLink';
-import * as actions from '../../actions/types';
-import * as actionCreators from '../../actions/index';
+import * as authActions from '../../actions/authActions';
+import * as uiActions from '../../actions/uiActions';
 
-const mapStateToProps = (state) => (
-  Object.assign({},{
-    user: state.user,
-    sidebarVisibility: state.ui.sidebarVisibility,
-    dropdownVisibility: state.ui.dropdownVisibility,
-    activeLink: state.ui.activeLink
-  })
-)
-
-const mapDispatchToProps = (dispatch) => ({
-  toggleSidebar: boolean => dispatch(actionCreators.toggleSideVisibility(boolean)),
-  toggleDropdown: boolean => dispatch(actionCreators.toggleDropdownVisibility(boolean)),
-  switchActive: path => dispatch(actionCreators.activeLink(path)),
-  signoutUser: () => {
-    localStorage.removeItem('token');
-    dispatch({ type: actions.UNAUTH_USER });
-  }
+const mapStateToProps = (state) => ({
+  user: state.user,
+  sidebarVisibility: state.ui.sidebarVisibility,
+  dropdownVisibility: state.ui.dropdownVisibility,
+  activeLink: state.ui.activeLink
 });
+
+const actions = {...authActions, ...uiActions};
+
+// const mapDispatchToProps = (dispatch) => ({
+//   toggleSidebar: boolean => dispatch(actionCreators.toggleSideVisibility(boolean)),
+//   toggleDropdown: boolean => dispatch(actionCreators.toggleDropdownVisibility(boolean)),
+//   switchActive: path => dispatch(actionCreators.activeLink(path)),
+//   signoutUser: () => {
+//     localStorage.removeItem('token');
+//     dispatch({ type: actions.UNAUTH_USER });
+//   }
+// });
 
 
 const Header = props => {
@@ -149,5 +149,5 @@ const Header = props => {
 }  
 
 
-const HeaderContainer = connect(mapStateToProps, mapDispatchToProps)(Header);
+const HeaderContainer = connect(mapStateToProps, actions)(Header);
 export default HeaderContainer;

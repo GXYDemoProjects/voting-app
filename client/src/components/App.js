@@ -1,8 +1,7 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
-// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-// import { connect } from 'react-redux';
-
+import { Route, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as authActions from '../actions/authActions';
 import Header from './Header/Header';
 import Footer from './Footer/Footer';
 import AllPolls from './Main/PollsPage/AllPolls';
@@ -18,13 +17,16 @@ import '../styles/App.css';
 
 class App extends React.Component {
 
+  componentDidMount() {
+    this.props.fetchAuth();
+  }
   render() {    
     return (
       <div className="app">
         <Header />
         <Route exact path="/" component={AllPolls} />
         <Route exact path="/allpolls" component={AllPolls} />
-        <Route path="/allpolls/:id" component={SinglePoll} />
+        <Route path="/polls/:id" component={SinglePoll} />
         <Route exact path="/mypolls" component={MyPolls} />
         <Route path="/mypolls/:id" component={MySinglePoll} />
         <Route path="/newpoll" component={NewPoll} />
@@ -36,4 +38,8 @@ class App extends React.Component {
     );
   }
 }
-export default App;
+
+// const mapStateToProps = state => ({
+//   authentication: state.user.authentication
+// }) 
+export default withRouter(connect(null, authActions)(App));

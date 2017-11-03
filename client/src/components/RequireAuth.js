@@ -5,13 +5,13 @@ const RequireAuth = ComposedComponent => {
   class Authentication extends Component {
 
     componentWillMount() {
-      if (!this.props.authenticated) {
+      if (!this.props.authentication) {
         this.props.history.push('/allpolls');
       }
     }
 
     componentWillUpdate(nextProps) {
-      if (!nextProps.authenticated) {
+      if (!nextProps.authentication) {
         this.props.history.push('/allpolls');
       }
     }
@@ -22,7 +22,7 @@ const RequireAuth = ComposedComponent => {
   }
 
   function mapStateToProps(state) {
-    return { authenticated: state.user.authentication };
+    return { authentication: state.user.authentication };
   }
 
   return connect(mapStateToProps)(Authentication);

@@ -1,10 +1,12 @@
 import React from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import AuthField from '../LoginPage/AuthField';
-import * as dispatchActions from '../../../actions/dispatchAction';
+import Error from '../LoginPage/Error';
+import * as authActions from '../../../actions/authActions';
+import * as errorActions from '../../../actions/errorActions';
 
 const formFields = [
   { label: 'Email', name: 'email', type:'text', icon: 'email' },
@@ -14,48 +16,54 @@ const formFields = [
 ];
 
 
-let RegisterForm = props => {
-  const { handleSubmit, signupUser, pristine, submitting, authError, values } = props;
-  const signUp = () => {
-    const { userName, email, password } = values;
-    console.log('userName,email,password:', userName,email,password);
-    signupUser(userName, email, password);
-    if(authError === 'success') {
-      props.history.push('/mypolls');
+class RegisterForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.signUp = this.signUp.bind(this);
+  }
+  componentWillReceiveProps() {
+    if(this.props.authentication) {
+      this.props.history.push('/mypolls');
     }
   }
-  return ( 
-    <div className="register-form">
-      <h5>Create Your Account</h5>
-      <form onSubmit={handleSubmit(signUp)}>
-        <div className="container">
-          {
-            formFields.map(({ label, name, type, icon }) => 
-              (<Field key={name} component={AuthField} icon={icon} type={type} label={label} name={name} />)
-            )
-          }
-        </div>
-        {
-          authError &&       
-          <div className="auth-error red-text">
-          {authError}
+  componentWillUnmount() {
+    this.props.removeErrors();
+  }
+  signUp() {
+    const { userName, email, password } = this.props.values;
+    console.log('userName,email,password:', userName,email,password);
+    this.props.signupUser(userName, email, password);
+  }
+  render () {
+    const { handleSubmit, pristine, submitting, authError} = this.props;
+    return ( 
+      <div className="register-form">
+        <h5>Create Your Account</h5>
+        <form onSubmit={handleSubmit(this.signUp)}>
+          <div className="container">
+            {
+              formFields.map(({ label, name, type, icon }) => 
+                (<Field key={name} component={AuthField} icon={icon} type={type} label={label} name={name} />)
+              )
+            }
           </div>
-        }
-        <button className="btn waves-effect waves-light" type="submit" name="action"  disabled={pristine || submitting}>
-          Register
-          <i className="material-icons right">send</i>
-        </button>
-      </form>
+          <Error error={authError} />
+          <button className="btn waves-effect waves-light" type="submit" name="action"  disabled={pristine || submitting}>
+            Register
+            <i className="material-icons right">send</i>
+          </button>
+        </form>
 
-      <p style={{marginTop: '10px'}}>
-        Already have an account?<span> </span> 
-        <Link to="/login">
-          Login to your account
-        </Link>
-      </p>
-    </div>
-  );
-};
+        <p style={{marginTop: '10px'}}>
+          Already have an account?<span> </span> 
+          <Link to="/login">
+            Login to your account
+          </Link>
+        </p>
+      </div>
+    );
+  }
+}
 
 const validate = (values) => {
   const errors = {};
@@ -79,14 +87,15 @@ const validate = (values) => {
 }
 
 const mapStateToProps = state => ({
-  authError: state.user.error,
+  authError: state.errors.authError,
   values: state.form.registerForm.values
 });
 
-RegisterForm =  withRouter(connect(mapStateToProps, dispatchActions)(RegisterForm));
+const actions = {...authActions, ...errorActions};
+const RegisterFormContainer =  withRouter(connect(mapStateToProps, actions)(RegisterForm));
 
 
 export default reduxForm({
   validate,
   form: 'registerForm',
-})(RegisterForm);
+})(RegisterFormContainer);

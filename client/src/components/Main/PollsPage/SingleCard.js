@@ -10,7 +10,7 @@ const SingleCard = ({ poll, type }) => {
           <p>{poll.description}</p>
         </div>
         <div className="card-action">
-          <Link to={`/${type ? 'mypolls': 'allpolls'}/${poll.id}`} className="waves-effect btn">
+          <Link to={`/polls/${poll._id}`} className="waves-effect btn">
             <i className="material-icons left md-light">forward</i> 
             See more
           </Link>

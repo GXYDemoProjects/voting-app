@@ -31,6 +31,7 @@ exports.signup = (req, res, next) => {
   User.findOne({ email: email })
   .exec()
   .then(existingUser => {
+    console.log('existingUser:', existingUser);
     // If a user with email does exist, return an error
     if (existingUser) {
       return res.status(422).send({ error: 'Email has been registed' });
@@ -48,26 +49,11 @@ exports.signup = (req, res, next) => {
     .catch(err => next(err))
   });
 }
-  // function(err, existingUser) {
-  //   if (err) { return next(err); }
 
-  //   // If a user with email does exist, return an error
-  //   if (existingUser) {
-  //     return res.status(422).send({ error: 'Email has been registed' });
-  //   }
-
-  //   // If a user with email does NOT exist, create and save user record
-  //   const user = new User({
-  //     userName: userName,
-  //     email: email,
-  //     password: password
-  //   });
-
-  //   user.save(function(err) {
-  //     if (err) { return next(err); }
-
-  //     // Repond to request indicating the user was created
-  //     res.json({ userName:userName, token: tokenForUser(user) });
-  //   });
-  // });
+exports.tokenAuthentication = (req, res, next) => {
+  if(!req.user) {
+    return res.status(401).send({error: 'Unauthorized'});
+  }
+  res.json({userName: req.user.userName});
+}
 
