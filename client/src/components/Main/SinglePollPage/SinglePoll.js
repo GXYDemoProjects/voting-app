@@ -1,9 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import * as pollActions from '../../../actions/pollActions';
 import * as errorActions from '../../../actions/errorActions';
+import * as uiActions from '../../../actions/uiActions';
 import Chart from './Chart';
 import SelectionForm from './SelectionForm';
+import Modal from './Modal';
+import Error from '../LoginPage/Error';
 
 class SinglePoll extends React.Component{
   constructor(props) {
@@ -17,12 +21,18 @@ class SinglePoll extends React.Component{
     this.props.clearCurrent();
     this.props.removeErrors();
   }
-  renderDeleteBtn(currentUser) {
-    if(!currentUser) {
+  componentWillReceiveProps() {
+    if(this.props.currentPoll.deleteStatus) {
+      this.props.history.push('/mypolls');
+    }
+  }
+  renderDeleteBtn() {
+    const currentPoll = this.props.currentPoll;
+    if(!currentPoll || !currentPoll.currentUser) {
       return null;
     }
     return (
-      <a className="waves-effect waves-light btn red lighten-1" >
+      <a className="waves-effect waves-light btn red lighten-1" onCLick={() => this.props.toggleModal(true)}>
       Remove this poll
       </a>
     );
@@ -49,6 +59,8 @@ class SinglePoll extends React.Component{
             <SelectionForm poll={currentPoll} pollId={pollId} vote={vote} pollError={pollError} />
           </div>
         </div>
+        <Modal title="" body="Are you sure to delete this poll?" 
+        onCancel={() => this.props.toggleModal(false)} onConfirm={() => this.props.deletePoll(currentPoll.pollId)} />
       </div>
     );
   }
@@ -56,8 +68,9 @@ class SinglePoll extends React.Component{
 
 const mapStateToProps = state => ({
   currentPoll: state.currentPoll,
-  pollError: state.errors.pollError
+  pollError: state.errors.pollError,
+  modalVisibility: state.ui.modalVisibility
 });
-const actions = {...pollActions, ...errorActions};
+const actions = {...pollActions, ...errorActions, ...uiActions};
 
-export default connect(mapStateToProps, actions)(SinglePoll);
+export default withRouter(connect(mapStateToProps, actions)(SinglePoll));

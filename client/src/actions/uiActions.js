@@ -15,3 +15,6 @@ export const switchActive = payload => {
   return dispatch => dispatch({type: actions.SWITCH_ACTIVE, payload});
 };
 
+export const toggleModal = status => {
+  return dispatch => dispatch({type: actions.TOGGLE_MODAL, status})
+}
