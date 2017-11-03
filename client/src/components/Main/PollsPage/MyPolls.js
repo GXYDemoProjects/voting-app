@@ -2,6 +2,7 @@ import React from 'react';
 import CardGrid from './CardGrid';
 import { connect } from 'react-redux';
 import * as pollActions from '../../../actions/pollActions';
+import * as errorActions from '../../../actions/errorActions';
 
 class MyPolls extends React.Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class MyPolls extends React.Component {
   }
   componentWillUnmount() {
     this.props.clearPolls();
+    this.props.removeErrors();
   }
   
   render() {
@@ -26,6 +28,7 @@ class MyPolls extends React.Component {
 const mapStateToProps = state => ({
   polls: state.polls,
 });
+const actions = {...pollActions, ...errorActions};
 
-const MyPollsContainer = connect(mapStateToProps, pollActions)(MyPolls);
+const MyPollsContainer = connect(mapStateToProps, actions)(MyPolls);
 export default MyPollsContainer;

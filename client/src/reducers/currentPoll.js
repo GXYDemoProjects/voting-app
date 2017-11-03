@@ -12,13 +12,15 @@ import * as actions from '../actions/types';
 const polls = (state = [], action) => {
   switch(action.type) {
     case actions.UPDATE_CURRENT: 
-      return { ...action.payload, deleteStatus: false, newStatus: ''};
+      return {...state, ...action.payload, newPollId: 0};
     case actions.DELETE_STATUS: 
       return {...state, deleteStatus: true}
     case actions.CLEAR_CURRENT: 
       return {};
     case actions.NEW_POLL:
       return {...state, newPollId: action.payload}
+    case actions.UNAUTH_USER:
+      return {...state, currentUser: false}
     default:
       return state;
   }

@@ -12,7 +12,8 @@ const errors = (state = {}, action) => {
     case actions.POLL_ERROR:
       return {...state, pollError: action.payload};
     case actions.CLEAR_ERROR:
-      return {authError: '', pollError: ''}
+    case actions.UNAUTH_USER:
+      return {authError: '', pollError: ''};
     default:
       return state;
   }

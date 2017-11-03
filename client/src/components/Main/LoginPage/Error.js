@@ -1,10 +1,10 @@
 import React from 'react';
-const Error = ({ error }) => {
-  if(error) {
+const Error = ({ error, className }) => {
+  if(!error) {
     return null;
   }
   return (      
-    <div className="auth-error red-text">
+    <div className={`${className} error red-text`} >
     {error}
     </div>
   )

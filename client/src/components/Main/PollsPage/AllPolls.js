@@ -5,7 +5,7 @@ import ToUpButton from './ToTopButton';
 import { connect } from 'react-redux';
 import * as pollActions from '../../../actions/pollActions';
 import * as uiActions from '../../../actions/uiActions';
-
+import * as errorActions from '../../../actions/errorActions';
 
 class AllPolls extends React.Component {
   constructor(props) {
@@ -16,6 +16,7 @@ class AllPolls extends React.Component {
   }
   componentWillUnmount() {
     this.props.clearPolls();
+    this.props.removeErrors();
   }
   
   render() {
@@ -36,7 +37,7 @@ const mapStateToProps = state => ({
   currentIndex: state.polls.length < state.ui.currentIndex ? state.polls.length : state.ui.currentIndex,
 });
 
-const actions = {...pollActions, ...uiActions};
+const actions = {...pollActions, ...uiActions, ...errorActions};
 // const mapDispatchToProps = (dispatch) => {
 //   return bindActionCreators(actionCreators, dispatch);
 // };

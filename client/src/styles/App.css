@@ -212,6 +212,9 @@ input:focus ~ .control-label, input:valid ~ .control-label {
 .auth-error {
   margin-left: 107px;
 }
+.poll-error {
+  margin-left: 0;
+}
 /* New Poll */
 .container.new-poll, .container.single-poll {
   padding: 10px 20px;
@@ -239,7 +242,6 @@ input:focus ~ .control-label, input:valid ~ .control-label {
 }
 .preview {
   text-align: left;
-  border: 1px solid #699;
   padding: 20px;
   margin: 20px 20px 20px 6px;
 }
@@ -256,3 +258,30 @@ input:focus ~ .control-label, input:valid ~ .control-label {
   margin-top: 40px;
 }
 
+/* Modal style */
+.modal{
+  display: block;
+  height: 100%;
+  max-height: 100%;
+  width: 100%;
+  z-index: 100;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(88, 88, 88, 0.6);
+}
+
+.content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 55%;
+  height: 170px;
+  background: white;
+}
+.modal .btn {
+  margin: 0 20px;
+}

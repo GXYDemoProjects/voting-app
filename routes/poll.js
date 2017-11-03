@@ -13,7 +13,7 @@ router.get('/allpolls', pollController.allpolls);
 router.get('/mypolls', requireAuth, pollController.mypolls);
 
 // get single poll
-router.get('/polls/:pollId', requireAuth, pollController.singlepoll);
+router.get('/polls/:pollId', requireAuth, authPoll, pollController.singlepoll);
 
 // vote for single poll
 router.post('/polls/:pollId/vote', requireAuth, pollController.vote);

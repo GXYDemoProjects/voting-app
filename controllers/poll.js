@@ -39,11 +39,14 @@ const getVotes = (pollId, candidates) => {
   .exec()
   .then(voteDoc => {
     console.log('voteDoc:', voteDoc);
-    let vote = {};
-    voteDoc.forEach(singleVote => vote[singleVote._id] = singleVote.number);
-    console.log('voteDefault:', voteDefault);
-    vote = {...voteDefault, ...vote};
-    console.log('vote:', vote);
+    let tmp = {};
+    
+    voteDoc.forEach(singleVote => tmp[singleVote._id] = singleVote.number);
+    tmp = {...voteDefault, ...tmp};
+    const vote = [];
+    for(let key of Object.keys(tmp)) {
+      vote.push({respond:key, number:tmp[key]});
+    }
     return vote;
   })
   .catch(err => {
@@ -55,12 +58,10 @@ const getVotes = (pollId, candidates) => {
 // new poll
 // post withAuth
 exports.newpoll = (req, res, next) => {
-  console.log('req.user:', req.user);
   if(!req.user) {
     return res.status(401).send({error: 'Unauthorized'});
   }
   const { title, description, candidates } = req.body;
-  console.log('title, description, candidates:', title, description, candidates);
   const poll = new Poll({
     title,
     description,
@@ -86,29 +87,22 @@ exports.allpolls = (req, res, next) => {
 // get single poll, return poll
 // get withAuth
 exports.singlepoll = (req, res, next) => {
-  const pollId = req.params.pollId;
-  const user = req.user;
-  console.log('pollId:', pollId);
-  console.log('user:', user);
-  
-  let singlePollData = {currentUser: !!user};
-  Poll
-  .findById(pollId)
-  .select('_id title description candidates')
-  .exec()
-  .then(pollDoc => {
-    console.log('pollDoc:', pollDoc);
-    singlePollData = {
-      ...singlePollData, 
-      pollId: pollDoc.id,
-      title : pollDoc.title,
-      description : pollDoc.description
-    };
-    getVotes(pollId, pollDoc.candidates)
-    .then(votes => {
-      singlePollData.data = votes;
-      res.json(singlePollData);
-    })
+  if(!req.currentPoll) {
+    return res.status(422).send({error: 'Wrong pollId'});
+  }
+
+  const currentPoll = req.currentPoll;
+  let singlePollData = {
+    pollId: currentPoll._id,
+    title : currentPoll.title,
+    description : currentPoll.description,
+    currentUser: req.currentUser
+  };
+
+  getVotes(currentPoll._id, currentPoll.candidates)
+  .then(votes => {
+    singlePollData.data = votes;
+    res.json(singlePollData);
   })
   .catch(err => res.status(422).send(err));
 };
@@ -211,7 +205,12 @@ exports.vote = (req, res, next) => {
 
 // delete withAuth
 exports.deletePoll = (req, res, next) => {
-
+  if(!req.currentUser) {
+    return res.status(422).send({error: 'You are not the author'});
+  }
+  if(!req.currentPoll) {
+    return res.status(422).send({error: 'Wrong pollId'});
+  }
   const pollId = req.params.pollId;
   
   Vote
@@ -221,7 +220,7 @@ exports.deletePoll = (req, res, next) => {
     Poll
     .remove({_id: pollId})
     .exec()
-    .then(() => res.json({'info':'remove sucess'}))
+    .then(() => res.json({'info':'remove success'}))
     .catch(err => res.status(422).send(err));
   })
   .catch(err => res.status(422).send(err));

@@ -18,8 +18,8 @@ class LoginForm extends React.Component {
     super(props);
     this.signIn = this.signIn.bind(this);
   }
-  componentWillReceiveProps() {
-    if(this.props.authentication) {
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.authentication) {
       this.props.history.push('/mypolls');
     }
   }
@@ -44,7 +44,7 @@ class LoginForm extends React.Component {
               )
             }
           </div>
-          <Error error={authError} />
+          <Error error={authError} className="auth-error" />
           <button className="btn waves-effect waves-light" type="submit" name="action"  disabled={pristine || submitting}>
             Login
             <i className="material-icons right">send</i>
@@ -67,6 +67,9 @@ const validate = (values) => {
   const re = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   if(!re.test(values.email)) {
     errors.email = 'You must provide a valid email';
+  }
+  if(values.password && values.password.length < 7) {
+    errors.password = 'Password should be longer than 6';
   }
   formFields.forEach(({ name }) => {
     if (!values[name]) {

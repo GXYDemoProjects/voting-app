@@ -21,8 +21,8 @@ class RegisterForm extends React.Component {
     super(props);
     this.signUp = this.signUp.bind(this);
   }
-  componentWillReceiveProps() {
-    if(this.props.authentication) {
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.authentication) {
       this.props.history.push('/mypolls');
     }
   }
@@ -47,7 +47,7 @@ class RegisterForm extends React.Component {
               )
             }
           </div>
-          <Error error={authError} />
+          <Error error={authError} className="auth-error" />
           <button className="btn waves-effect waves-light" type="submit" name="action"  disabled={pristine || submitting}>
             Register
             <i className="material-icons right">send</i>
@@ -87,6 +87,7 @@ const validate = (values) => {
 }
 
 const mapStateToProps = state => ({
+  authentication: state.user.authentication,
   authError: state.errors.authError,
   values: state.form.registerForm.values
 });

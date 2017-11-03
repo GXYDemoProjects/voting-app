@@ -9,7 +9,7 @@ const polls = (state = [], action) => {
     case actions.UPDATE_POLLS: 
       return action.payload;
     case actions.CLEAR_POLLS:
-      return {};
+      return [];
     default:
       return state;
   }

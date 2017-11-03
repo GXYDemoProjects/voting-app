@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { formValueSelector } from 'redux-form';
 import * as pollActions from '../../../actions/pollActions';
 import * as errorActions from '../../../actions/errorActions';
 import * as uiActions from '../../../actions/uiActions';
@@ -12,17 +13,18 @@ import Error from '../LoginPage/Error';
 class SinglePoll extends React.Component{
   constructor(props) {
     super(props);
+    this.formatData = this.formatData.bind(this);
   }
   componentDidMount() {
     const pollId = this.props.match.params.id;
-    this.props.fetchMyPolls(pollId);
+    this.props.fetchCurrentPoll(pollId);
   }
   componentWillUnmount() {
     this.props.clearCurrent();
     this.props.removeErrors();
   }
-  componentWillReceiveProps() {
-    if(this.props.currentPoll.deleteStatus) {
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.currentPoll.deleteStatus) {
       this.props.history.push('/mypolls');
     }
   }
@@ -32,44 +34,52 @@ class SinglePoll extends React.Component{
       return null;
     }
     return (
-      <a className="waves-effect waves-light btn red lighten-1" onCLick={() => this.props.toggleModal(true)}>
+      <a className="waves-effect waves-light btn red lighten-1" onClick={() => this.props.toggleModal(true)}>
       Remove this poll
       </a>
     );
   }
+  formatData(originalVotes) {
+    let formatVotes = [['item', 'number']];
+    originalVotes.forEach(item => formatVotes.push([item.respond, item.number]))
+    console.log('formatVotes:', formatVotes);
+    return formatVotes;
+  }
   render() {
-    const { currentPoll, vote, pollError } = this.props;
-    if (!currentPoll) {
+    const pollId = this.props.match.params.id;
+    const { currentPoll, vote, voteValue, pollError, toggleModal, modalVisibility, deletePoll } = this.props;
+    if (!currentPoll || !currentPoll.title) {
       return null;
     }
-    const data = currentPoll.data.map(d=>[d.item, d.number])
-    const pollId = this.props.match.params.id;
-    data.unshift(['item', 'number']);
-    console.log('data:', data);
+
     return (
       <div className="container single-poll">
         <div className="row">
           <div className="col m12 l7">
             <div>
-              <Chart data={data} />
+              <Chart data={this.formatData(currentPoll.data)} />
               {this.renderDeleteBtn(currentPoll.currentUser)}
             </div>
           </div>
           <div className="col m12 l5">
-            <SelectionForm poll={currentPoll} pollId={pollId} vote={vote} pollError={pollError} />
+            <SelectionForm poll={currentPoll} pollId={pollId} vote={vote} pollError={pollError} voteValue={voteValue}/>
           </div>
         </div>
-        <Modal title="" body="Are you sure to delete this poll?" 
-        onCancel={() => this.props.toggleModal(false)} onConfirm={() => this.props.deletePoll(currentPoll.pollId)} />
+        <Modal title="Are you sure to delete this poll?" body="" modalVisibility={modalVisibility}
+        onCancel={() => toggleModal(false)} onConfirm={() => deletePoll(currentPoll.pollId)} />
       </div>
     );
   }
 }
 
+const selector = formValueSelector('selectionForm'); // <-- same as form name
+
 const mapStateToProps = state => ({
   currentPoll: state.currentPoll,
   pollError: state.errors.pollError,
-  modalVisibility: state.ui.modalVisibility
+  modalVisibility: state.ui.modalVisibility,
+  voteValue : selector(state, 'voteValue')
+  
 });
 const actions = {...pollActions, ...errorActions, ...uiActions};
 

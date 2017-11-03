@@ -5,33 +5,38 @@ const ROOT_URL = 'http://localhost:5000/api';
 
 const _axios = axios.create({
   baseURL: `${ROOT_URL}`,
-  timeout: 2000,
-  headers: { authorization: localStorage.getItem('token') }
+  timeout: 2000
 });
 
 export const fetchAllPolls = () => {
   return dispatch => {
-    _axios.get(`/allpolls`)
+    _axios.get(`/allpolls`,
+    {headers: { authorization: localStorage.getItem('token') }})
     .then(res => {
       dispatch({
         type: actions.UPDATE_POLLS,
         payload: res.data.polls
       });
     })
-    .catch(err => dispatch({type: actions.POLL_ERROR, error: err.response.data.error}));
+    .catch(err => dispatch({type: actions.POLL_ERROR, payload: err.response.data.error}));
   }
 };
 
 export const fetchMyPolls = () => {
   return dispatch => {
-    axios.get(`/mypolls`)
+    console.log('token:', localStorage.getItem('token'));
+    _axios.get(`/mypolls`,
+    {headers: { authorization: localStorage.getItem('token') }})
     .then(res => {
       dispatch({
         type: actions.UPDATE_POLLS,
         payload: res.data.polls
       });
     })
-    .catch(err => dispatch({type: actions.POLL_ERROR, error: err.response.data.error}));
+    .catch(err => {
+      console.log('err:', err);
+      dispatch({type: actions.POLL_ERROR, payload: err.response.data.error})
+    });
   }
 };
 
@@ -39,46 +44,58 @@ export const fetchMyPolls = () => {
 
 export const fetchCurrentPoll = pollId => {
   return dispatch => {
-    axios.get(`/polls/${pollId}`)
+    _axios.get(`/polls/${pollId}`,
+    {headers: { authorization: localStorage.getItem('token') }})
     .then(res => {
+      console.log('res:', res);
       dispatch({
         type: actions.UPDATE_CURRENT,
         payload: res.data
       });
     })
-    .catch(err => dispatch({type: actions.POLL_ERROR, error: err.response.data.error}));
+    .catch(err => dispatch({type: actions.POLL_ERROR, payload: err.response.data.error}));
   }
 };
 
 export const newPoll = (title, description, candidates) => {
   return dispatch => {
-    axios.post('/newpoll')
+    _axios.post('/newpoll', {title, description, candidates},
+    {headers: { authorization: localStorage.getItem('token') }})
     .then(res => {
       dispatch({type: actions.NEW_POLL, payload: res.data.pollId});
     })
-    .catch(err => dispatch({type: actions.POLL_ERROR, error: err.response.data.error}));
+    .catch(err => dispatch({type: actions.POLL_ERROR, payload: err.response.data.error}));
   }
 }
 
 export const vote = (pollId, voteValue) => {
   return dispatch => {
-    axios.post(`/${pollId}/vote`, {voteValue})
+    _axios.post(`/polls/${pollId}/vote`, {voteValue},
+    {headers: { authorization: localStorage.getItem('token') }})
     .then(response => {
       dispatch({ type:actions.UPDATE_CURRENT, 
         payload: response.data
       })
     })
-    .catch(err => dispatch({type: actions.POLL_ERROR, error: err.response.data.error}));
+    .catch(err => {
+      console.log('err:', err.response);
+      dispatch({type: actions.POLL_ERROR, payload: err.response.data.error})
+    });
   };
 };
 
 export const deletePoll = pollId => {
   return dispatch => {
-    axios.delete(`/pollId`)
+    _axios.delete(`/${pollId}`,
+    {headers: { authorization: localStorage.getItem('token') }})
     .then(res => {
-      dispatch({type: actions.DELETE_STATUS})
+      dispatch({type: actions.DELETE_STATUS});
+      dispatch({type: actions.TOGGLE_MODAL, status: false});
     })
-    .catch(err => dispatch({type: actions.POLL_ERROR, error: err.response.data.error}));
+    .catch(err => {
+      console.log('err:', err);
+      dispatch({type: actions.POLL_ERROR, payload: err.response.data.error});
+    });
   }
 };
 

@@ -12,30 +12,33 @@ export const signinUser = (email, password) => {
       .then(response => {
         // If request is good...
         // - Update state to indicate user is authenticated
-        console.log('response.data:', response.data);
+        localStorage.setItem('token', response.data.token);
+        console.log('set token', localStorage.getItem('token'));
         dispatch({ type: actions.AUTH_USER, payload: response.data.userName });
         // - Save the JWT token
-        localStorage.setItem('token', response.data.token);
         // - redirect to the route '/feature'
       })
       .catch(err => {
         // If request is bad...
         // - Show an error to the user
-        dispatch({type:actions.AUTH_ERROR, payload:err.response})
+        console.log('err:', err.response);
+        dispatch({type:actions.AUTH_ERROR, payload:'Your password or email may be wrong'})
       });
   }
 };
 
 export const signupUser = (userName, email, password) => {
   return dispatch => {
-    dispatch({type: actions.CLEAR_ERROR});
     axios.post(`${ROOT_URL}/signup`, { userName, email, password })
       .then(response => {
         console.log('response.data:', response.data);
         dispatch({ type: actions.AUTH_USER, payload: response.data.userName });
         localStorage.setItem('token', response.data.token);
       })
-      .catch(err => dispatch({ type:actions.AUTH_ERROR, payload:err.response.data.error }));
+      .catch(err => {
+        console.log('err:', err.response);
+        dispatch({ type:actions.AUTH_ERROR, payload:err.response.data.error })
+      });
   }
 };
 

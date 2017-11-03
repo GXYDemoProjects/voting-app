@@ -40,8 +40,8 @@ class NewPollForm extends React.Component {
     super(props);
     this.newPoll = this.newPoll.bind(this);
   }
-  componentWillReceiveProps() {
-    const { newPollId } = this.props; 
+  componentWillReceiveProps(nextProps) {
+    const newPollId = nextProps.newPollId; 
     if(newPollId) {
       this.props.history.push(`/polls/${newPollId}`);
     }
@@ -58,7 +58,7 @@ class NewPollForm extends React.Component {
   render() {
     const { handleSubmit, submitting, error } = this.props;
     return (
-      <form onSubmit={handleSubmit(() => {console.log(true)})}>
+      <form onSubmit={handleSubmit(this.newPoll)}>
         {
           formFields.map(({ label, name, type, icon }) => 
             (<Field key={name} component={AuthField} icon={icon} type={type} label={label} name={name} />)
@@ -66,7 +66,7 @@ class NewPollForm extends React.Component {
         }
 
         <FieldArray name="candidates" component={renderCandidates} />
-        <Error err={error} />
+        <Error error={error} className="auth-error" />
         <button className="btn-save btn waves-effect waves-light" type="submit" disabled={submitting} >
           Save Poll
         </button>
@@ -75,9 +75,9 @@ class NewPollForm extends React.Component {
   }
 }
 const mapStateToProps = state => ({
-  newStatus: state.currentPoll.newStatus,
+  newPollId: state.currentPoll.newPollId,
   error: state.authError,
-  values: state.form.loginForm.values,
+  values: state.form.newPollForm.values,
 });
 
 const actions = {...pollActions, ...errorActions};

@@ -1,6 +1,6 @@
 import * as actions from './types';
 
-export const toggleSideBar = status => {
+export const toggleSidebar = status => {
   return dispatch => dispatch({type: actions.TOGGLE_SIDE, status});
 }
 export const toggleDropdown = status => {

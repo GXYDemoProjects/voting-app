@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import ActiveNavLink from './ActiveNavLink';
 import * as authActions from '../../actions/authActions';
 import * as uiActions from '../../actions/uiActions';
@@ -86,11 +86,13 @@ const Header = props => {
       return e => toggleDrop(e);
     }
   }
+  const currentLocation = props.history.location.pathname;
   const loggedIn = (type) => {
     return (
     <span>
-      <ActiveNavLink switchActive={switchActive} to="/mypolls" label="My Polls"  className={type==='PC' ? 'item' : ''} />
-      <ActiveNavLink switchActive={switchActive} to="/newpoll" label="New Poll" className={type==='PC' ? 'item' : ''} />
+      {<ActiveNavLink currentLocation={currentLocation} to="/mypolls" label="My Polls"  className={type==='PC' ? 'item' : ''} />}
+      {<ActiveNavLink currentLocation={currentLocation} to="/newpoll" label="New Poll" className={type==='PC' ? 'item' : ''} />}
+
       <li className={type==='PC' ? 'item' : ''}>
         <a className="dropdown-button" onClick={handleDrop(type)} >
           {user.userName}
@@ -122,16 +124,15 @@ const Header = props => {
               <i className="material-icons">menu</i>
             </a>       
             <ul id="nav-mobile" className="right hide-on-med-and-down">
-              <ActiveNavLink switchActive={switchActive} to="/allpolls" activeOnlyWhenExact={true} label="Home" className="item"/>
-              {/* <ActiveNavLink switchActive={switchActive} to="/mypolls" label="My Polls" className="item"/> */}
-              {/* <ActiveNavLink switchActive={switchActive} to="/newpoll" label="New Poll" className="item"/> */}
+              <ActiveNavLink currentLocation={currentLocation} to="/allpolls" label="Home" className="item"/>
+
               {user.authentication ? loggedIn('PC') : loggedOut}
             </ul>
             {dropdown('PC')}      
             {
               (sidebarVisibility) &&
               <ul className="side-nav" id="mobile-demo">
-                <ActiveNavLink switchActive={switchActive} to="/allpolls" activeOnlyWhenExact={true} label="Home" className=""/>
+                <ActiveNavLink currentLocation={currentLocation} to="/allpolls" label="Home" className=""/>
                 {/* <li className="active"><Link to="/">Home</Link></li>
                 <li><Link to="/mypolls">My Polls</Link></li>
                 <li><Link to="/newpoll">New Poll</Link></li> */}
@@ -150,4 +151,4 @@ const Header = props => {
 
 
 const HeaderContainer = connect(mapStateToProps, actions)(Header);
-export default HeaderContainer;
+export default withRouter(HeaderContainer);
