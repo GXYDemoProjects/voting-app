@@ -11,7 +11,6 @@ const tokenForUser = user => {
 exports.signin = (req, res, next) => {
   // User has already had their email and password auth'd
   // We just need to give them a token
-  console.log('req.user:', req.user);
   if(req.user) {
     res.send({ userName: req.user.userName, token: tokenForUser(req.user) });
   } else {
@@ -23,7 +22,6 @@ exports.signup = (req, res, next) => {
   const userName = req.body.userName;
   const email = req.body.email;
   const password = req.body.password;
-  console.log('userName,email,password:', userName, email, password);
   if (!userName || !email || !password) {
     return res.status(422).send({ error: 'You must provide userName, email and password'});
   }
@@ -32,7 +30,6 @@ exports.signup = (req, res, next) => {
   User.findOne({ email: email })
   .exec()
   .then(existingUser => {
-    console.log('existingUser:', existingUser);
     // If a user with email does exist, return an error
     if (existingUser) {
       return res.status(422).send({ error: 'Email has been registed' });

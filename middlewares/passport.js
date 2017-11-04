@@ -56,7 +56,6 @@ passport.use(localLogin);
 const requireSignin = passport.authenticate('local', { session: false });
 const requireAuth = (req, res, next) => {
   passport.authenticate('jwt', { session: false }, (err, payload, info) => {
-    console.log('err,payload:', err,payload);
     if(err) {
       next(err);
     }
@@ -67,13 +66,6 @@ const requireAuth = (req, res, next) => {
   })(req, res, next);
 }
 
-// const requireAuth = passport.authenticate('jwt', { session: false }, (err, payload) => {
-//   if(err) {
-//     res.status(401).send({error: 'Unauthorized'});
-//   }
-//   console.log('err:', err);
-//   console.log('payload:', payload);
-// });
 
 exports.requireSignin = requireSignin;
 exports.requireAuth = requireAuth;

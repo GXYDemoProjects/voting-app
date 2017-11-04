@@ -2,28 +2,6 @@ const ObjectId = require('mongoose').Types.ObjectId;
 const Poll = require('../models/poll');
 const Vote = require('../models/vote');
 
-// const singlePollData = (doc, user) => {
-//   console.log('doc:', doc);
-//   const arrVotes = [['candidate', 'number']];
-//   const votes = {};
-//   doc.recipients.forEach(recipient => {
-//     votes[recipient.respond] = (votes[doc.respond] || 0) + 1;
-//   });
-//   for(let item of votes) {
-//     console.log('item:', item);
-//     arrVotes.push([item, votes[item]]);
-//   }
-//   const { _id, title, description } = doc;
-//   const res = {
-//     pollId: _id,
-//     title,
-//     description,
-//     data: arrVotes,
-//     currentUser: !!user
-//   };
-//   console.log('res:', res);
-//   return res;
-// }
 
 const getVotes = (pollId, candidates) => {
   let voteDefault = {};
@@ -38,7 +16,6 @@ const getVotes = (pollId, candidates) => {
   ])
   .exec()
   .then(voteDoc => {
-    console.log('voteDoc:', voteDoc);
     let tmp = {};
     
     voteDoc.forEach(singleVote => tmp[singleVote._id] = singleVote.number);
@@ -173,7 +150,6 @@ exports.vote = (req, res, next) => {
       })
       .catch(err => res.status(422).send(err));
     } else if(ip) {
-      console.log('ip:', ip);
       Vote
       .findOne({_poll : pollId, vote_ip: ip})
       .then(voteDoc => {

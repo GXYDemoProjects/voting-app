@@ -7,7 +7,6 @@ exports.authPoll = (req, res, next) => {
   .findById(pollId)
   .exec()
   .then(pollDoc => {
-    console.log('pollDoc:', pollDoc);
     req.currentPoll = pollDoc;
     if (pollDoc && req.user && pollDoc._user.equals(req.user._id)) {
       req.currentUser = true;
