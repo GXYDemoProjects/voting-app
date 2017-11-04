@@ -4,7 +4,7 @@ This app is a project for FCC challenge of [Building a Voting App](https://www.f
 This app is bootstraped with [Create-react-app-with-a-server](https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/).
 
 ## Build a Voting App
-[![Travis CI](https://travis-ci.org/GuoXiaoyang/Voting-App.svg?branch=master)](https://travis-ci.org/GuoXiaoyang/Voting-App) [![Heroku](http://heroku-badge.herokuapp.com/?app=voting-app-gxy&style=flat&svg=1)](https://voting-app-gxy.herokuapp.com/) [!
+[![Travis CI](https://travis-ci.org/GuoXiaoyang/Voting-App.svg?branch=master)](https://travis-ci.org/GuoXiaoyang/Voting-App) [![Heroku](http://heroku-badge.herokuapp.com/?app=voting-app-gxy&style=flat&svg=1)](https://voting-app-gxy.herokuapp.com/)
 
 
 ## Demo:
@@ -17,7 +17,10 @@ Demo for Chinese user(may be faster):
 - [x] User Story: I can create a user(sign up) and signin with this user.
 - [x] User Story: As an authenticated user, I can keep my polls and come back later to access them.
 - [ ] User Story: As an authenticated user, I can share my polls with my friends.
-<div style="color:red">Not realized since the third party authentication is a little bit difficult for Chinese user</div>
+
+```diff
+Not realized since the third party authentication like twitter or facebook is a little bit difficult for Chinese user(maybe for me)
+```
 
 
 - [x] User Story: As an authenticated user, I can see the aggregate results of my polls.
