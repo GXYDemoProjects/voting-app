@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import ActiveNavLink from './ActiveNavLink';
 import * as authActions from '../../actions/authActions';
 import * as uiActions from '../../actions/uiActions';
@@ -86,7 +86,7 @@ const Header = props => {
       return e => toggleDrop(e);
     }
   }
-  const currentLocation = props.currentLocation;
+  const currentLocation = props.history.location.pathname;
   const loggedIn = (type) => {
     return (
     <span>
@@ -151,4 +151,4 @@ const Header = props => {
 
 
 const HeaderContainer = connect(mapStateToProps, actions)(Header);
-export default HeaderContainer;
+export default withRouter(HeaderContainer);

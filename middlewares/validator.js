@@ -2,6 +2,7 @@ const validator = require('validator');
 
 const checkUser = (req, res, next) => {
   // check email
+  console.log('req.body:', req.body);
   req.body.email = req.body.email.trim();
 
   const validEmail = validator.isEmail(req.body.email);

@@ -7,5 +7,5 @@ cache:
     - node_modules
     - client/node_modules
 script:
-#  - cd client && npm i && npm test
-  - npm run build
+ - cd client && npm i && npm run test
+  # - npm run build

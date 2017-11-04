@@ -8,9 +8,9 @@ import reducer from './reducers';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const middleware = () => {
   if (process.env.NODE_ENV === 'production') {
+    console.log('process.env.NODE_ENV:', process.env.NODE_ENV);
     return applyMiddleware(ReduxThunk);
   } else {
-    console.log('process.env.NODE_ENV:', process.env.NODE_ENV);
     return applyMiddleware(ReduxThunk, logger);
   }
 }
