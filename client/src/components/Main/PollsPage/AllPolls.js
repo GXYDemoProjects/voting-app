@@ -7,7 +7,7 @@ import * as pollActions from '../../../actions/pollActions';
 import * as uiActions from '../../../actions/uiActions';
 import * as errorActions from '../../../actions/errorActions';
 
-class AllPolls extends React.Component {
+export class AllPolls extends React.Component {
 
   componentDidMount() {
     this.props.fetchAllPolls();

@@ -4,7 +4,7 @@ import * as actions from '../actions/pollActions';
 import * as types from '../actions/types';
 import fetchMock from 'fetch-mock';
 // import expect from 'expect' // You can use any testing library
-import mockPolls from './mockPolls';
+import mockPolls from '../data/mockPolls';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);

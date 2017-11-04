@@ -5,3 +5,5 @@ npm-debug.log
 .env
 
 /client1
+fetchContainer.js
+AllPolls.test.js
