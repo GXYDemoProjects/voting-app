@@ -2,9 +2,9 @@ const router = require('express').Router();
 const pollController = require('../controllers/poll');
 const requireAuth = require('../middlewares/passport').requireAuth;
 const authPoll = require('../middlewares/authPollUser').authPoll;
-
+const validator = require('../middlewares/validator');
 // new poll
-router.post('/newpoll', requireAuth, pollController.newpoll);
+router.post('/newpoll', validator.checkNewPoll, requireAuth, pollController.newpoll);
 
 // get all polls
 router.get('/allpolls', pollController.allpolls);
@@ -16,7 +16,7 @@ router.get('/mypolls', requireAuth, pollController.mypolls);
 router.get('/polls/:pollId', requireAuth, authPoll, pollController.singlepoll);
 
 // vote for single poll
-router.post('/polls/:pollId/vote', requireAuth, pollController.vote);
+router.post('/polls/:pollId/vote', validator.checkVote, requireAuth, pollController.vote);
 
 // delete single poll
 router.delete('/:pollId', requireAuth, authPoll, pollController.deletePoll);
