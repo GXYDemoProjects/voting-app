@@ -11,8 +11,11 @@ mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGO_URL, {useMongoClient: true});
 
 // App Setup
-app.use(morgan('combined'));
-app.use(cors());
+console.log('process.env.NODE_ENV:', process.env.NODE_ENV);
+if (process.env.NODE_ENV.startsWith('development')) {
+  app.use(morgan('combined'));
+  app.use(cors());
+}
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({extended: false}));
 

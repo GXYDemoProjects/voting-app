@@ -1,16 +1,15 @@
 This app is a project for FCC challenge of [Building a Voting App](https://www.freecodecamp.org/challenges/build-a-voting-app).
-<!-- It is bootstraped by [clementinejs-fcc](https://github.com/johnstonbl01/clementinejs-fcc). -->
 
-This app is bootstraped with [Create-react-app-with-a-server](https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/).
+This app is bootstraped with [Create-react-app](https://github.com/facebookincubator/create-react-app).
 
 ## Build a Voting App
 [![Travis CI](https://travis-ci.org/GuoXiaoyang/Voting-App.svg?branch=master)](https://travis-ci.org/GuoXiaoyang/Voting-App) [![Heroku](http://heroku-badge.herokuapp.com/?app=voting-app-gxy&style=flat&svg=1)](https://voting-app-gxy.herokuapp.com/)
 
 
-## Demo:
-C9.io Demo: https://voting-app-guoxiaoyang.c9users.io/
-Heroku Demo: https://voting-app-gxy.herokuapp.com
-Demo for Chinese user(may be faster): 
+## Demo
+* C9.io Demo: https://voting-app-guoxiaoyang.c9users.io/
+* Heroku Demo: https://voting-app-gxy.herokuapp.com
+* Demo for Chinese user(may be faster): 
 
 
 ## TODO List
@@ -18,9 +17,7 @@ Demo for Chinese user(may be faster):
 - [x] User Story: As an authenticated user, I can keep my polls and come back later to access them.
 - [ ] User Story: As an authenticated user, I can share my polls with my friends.
 
-```diff
 Not realized since the third party authentication like twitter or facebook is a little bit difficult for Chinese user(maybe for me)
-```
 
 
 - [x] User Story: As an authenticated user, I can see the aggregate results of my polls.

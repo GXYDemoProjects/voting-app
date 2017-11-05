@@ -53,13 +53,13 @@ class SinglePoll extends React.Component{
     return (
       <div className="container single-poll">
         <div className="row">
-          <div className="col m12 l7">
+          <div className="col s12 m12 l7">
             <div>
               <Chart data={this.formatData(currentPoll.data)} />
               {this.renderDeleteBtn(currentPoll.currentUser)}
             </div>
           </div>
-          <div className="col m12 l5">
+          <div className="col s12 m12 l5">
             <SelectionForm poll={currentPoll} pollId={pollId} vote={vote} pollError={pollError} voteValue={voteValue}/>
           </div>
         </div>

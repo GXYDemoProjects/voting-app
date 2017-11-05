@@ -113,7 +113,7 @@ export const vote = (pollId, voteValue) => {
     return fetch(`${ROOT_URL}/polls/${pollId}/vote`, postWithData({voteValue}))
     .then(res => res.json())
     .then(res => {
-      console.log('res:', res);
+      // console.log('res:', res);
       if(res.error) {
         dispatch({ type:actions.POLL_ERROR, payload:res.error });
       } else {
