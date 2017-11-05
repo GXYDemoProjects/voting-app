@@ -26,6 +26,7 @@ export const signinUser = (email, password) => {
     .then(res => {
       // If request is good...
       // - Update state to indicate user is authenticated
+      console.log('res:', res);
       if(res.error) {
         dispatch({ type:actions.AUTH_ERROR, payload:res.error });
       } else {
@@ -39,7 +40,7 @@ export const signinUser = (email, password) => {
       // If request is bad...
       // - Show an error to the user
       console.log('err:', err);
-      // dispatch({type:actions.AUTH_ERROR, payload:'Your password or email may be wrong'})
+      dispatch({type:actions.AUTH_ERROR, payload:'Your password or email may be wrong'})
     });
   }
 };

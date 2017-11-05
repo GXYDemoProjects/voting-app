@@ -7,9 +7,8 @@ This app is bootstraped with [Create-react-app](https://github.com/facebookincub
 
 
 ## Demo
-* C9.io Demo: https://voting-app-guoxiaoyang.c9users.io/
 * Heroku Demo: https://voting-app-gxy.herokuapp.com
-* Demo for Chinese user(may be faster): 
+* Another demo: http://voting.guoxiaoyang.xyz
 
 
 ## TODO List
@@ -26,3 +25,7 @@ Not realized since the third party authentication like twitter or facebook is a 
 - [x] User Story: As an unauthenticated or authenticated user, I can see and vote on everyone's polls.
 - [x] User Story: As an unauthenticated or authenticated user, I can see the results of polls in chart form. (This could be implemented using Chart.js or Google Charts.)
 - [ ] User Story: As an authenticated user, if I don't like the options on a poll, I can create a new option.
+
+
+## More need to do
+- [ ] Add Masonry layout
