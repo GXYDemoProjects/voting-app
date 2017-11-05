@@ -44,8 +44,8 @@
     "validator": "^9.1.1"
   },
   "scripts": {
-    "start": "node ./index.js",
-    "server": "set NODE_ENV=development && nodemon index.js",
+    "start": "node index.js",
+    "server": "node index.js",
     "client": "npm run start --prefix client",
     "build": "set NODE_ENV=production && nodemon index.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
