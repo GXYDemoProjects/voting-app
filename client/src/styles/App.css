@@ -278,15 +278,22 @@ input:focus ~ .control-label, input:valid ~ .control-label {
   background-color: rgba(88, 88, 88, 0.6);
 }
 
-.content {
+.modal .content {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translateX(-50%) translateY(-50%);
   width: 55%;
-  height: 170px;
+  height: 320px;
   background: white;
 }
-.modal .btn {
-  margin: 0 20px;
+.modal .modal-footer {
+  position: absolute;
+  bottom: 100px;
+  background: white;
+  text-align: center;
+}
+.modal .modal-footer .btn {
+  margin: 10px 20px;
+  width: 120px;
 }

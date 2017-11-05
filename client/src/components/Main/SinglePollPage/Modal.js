@@ -11,6 +11,8 @@
           <div className="modal-content">
             <h4>{title}</h4>
             <p>{body}</p>
+          </div>
+          <div className="modal-footer">
             <a onClick={onConfirm} className="waves-effect waves-green btn">Confirm</a>
             <a onClick={onCancel} className="waves-effect waves-green btn">Cancel</a>
           </div>
