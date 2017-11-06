@@ -26,7 +26,7 @@ Not realized since the third party authentication like twitter or facebook is a 
 - [x] User Story: As an unauthenticated or authenticated user, I can see and vote on everyone's polls.
 - [x] User Story: As an unauthenticated or authenticated user, I can see the results of polls in chart form. (This could be implemented using Chart.js or Google Charts.)
 - [ ] User Story: As an authenticated user, if I don't like the options on a poll, I can create a new option.
-
+- [ ] Responsive layout
 
 ## More need to do
 - [ ] Add Masonry layout
