@@ -9,6 +9,7 @@ This app is bootstraped with [Create-react-app](https://github.com/facebookincub
 ## Demo
 * Heroku Demo: https://voting-app-gxy.herokuapp.com
 * Another demo: http://voting.guoxiaoyang.xyz
+* Maybe faster for Chinese users: http://47.95.220.98:5000/
 
 
 ## TODO List
